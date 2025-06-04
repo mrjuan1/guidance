@@ -1,0 +1,3 @@
+[submodule "kanban_tasks"]
+	path = addons/kanban_tasks
+	url = https://github.com/HolonProduction/godot_kanban_tasks

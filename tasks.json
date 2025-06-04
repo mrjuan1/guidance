@@ -1,0 +1,138 @@
+{
+	"categories": [
+		{
+			"uuid": "901568a6-2f5e-485f-b4a1-5fe57824f745",
+			"title": "Task",
+			"color": "ca9ee6"
+		},
+		{
+			"uuid": "795631ba-e1cb-45f8-ac92-4b284917d33a",
+			"title": "Feature",
+			"color": "009bd8"
+		},
+		{
+			"uuid": "47d05e83-e571-4cdb-b6f9-35a3cebcddbb",
+			"title": "Bug",
+			"color": "d31a68"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "e9b6ce0a-dde5-4adb-bd7f-c076329b5f11",
+			"title": "Todo",
+			"tasks": [
+				"f6e53c2b-785e-4714-bea1-20ad0fdaf011",
+				"73c7248f-0961-45e3-af73-a98d5f6c2880",
+				"30e3fb79-9205-48e3-8305-49b58d9ce836",
+				"3d014ec7-d84a-43c5-b4b3-338291fa6228"
+			]
+		},
+		{
+			"uuid": "5328beaf-8c19-4c90-b681-4fd8dd2a3fcb",
+			"title": "In Progress",
+			"tasks": []
+		},
+		{
+			"uuid": "d85997a6-18f5-492e-b32f-79140b4ae621",
+			"title": "Done",
+			"tasks": []
+		},
+		{
+			"uuid": "51853d8d-548d-461b-a03a-7a44ca1d57b6",
+			"title": "On Hold",
+			"tasks": []
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "73c7248f-0961-45e3-af73-a98d5f6c2880",
+			"title": "Power source",
+			"description": "3D model can be a box with a border and a light on top. Light will be red when off and green when on. The box sides will be grey when off and an orangish-yellow when on. It will also produce light when on.",
+			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
+			"steps": [
+				{
+					"details": "Sample scene",
+					"done": false
+				},
+				{
+					"details": "On/off states",
+					"done": false
+				},
+				{
+					"details": "Toggling",
+					"done": false
+				},
+				{
+					"details": "3D model",
+					"done": false
+				},
+				{
+					"details": "Lighting",
+					"done": false
+				},
+				{
+					"details": "Interactive link",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "30e3fb79-9205-48e3-8305-49b58d9ce836",
+			"title": "Chain placement",
+			"description": "",
+			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
+			"steps": []
+		},
+		{
+			"uuid": "3d014ec7-d84a-43c5-b4b3-338291fa6228",
+			"title": "Light beacon",
+			"description": "",
+			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
+			"steps": []
+		},
+		{
+			"uuid": "f6e53c2b-785e-4714-bea1-20ad0fdaf011",
+			"title": "Camera controls",
+			"description": "Camera panning with left click drag\nCamera rotation with right click drag\nCamera zoom with mouse wheel\nMiddle click to reset camera rotation and zoom",
+			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
+			"steps": [
+				{
+					"details": "Sample scene",
+					"done": false
+				},
+				{
+					"details": "Camera panning",
+					"done": false
+				},
+				{
+					"details": "Camera rotation",
+					"done": false
+				},
+				{
+					"details": "Camera zooming",
+					"done": false
+				},
+				{
+					"details": "Camera reset",
+					"done": false
+				}
+			]
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"e9b6ce0a-dde5-4adb-bd7f-c076329b5f11"
+			],
+			[
+				"5328beaf-8c19-4c90-b681-4fd8dd2a3fcb"
+			],
+			[
+				"d85997a6-18f5-492e-b32f-79140b4ae621"
+			],
+			[
+				"51853d8d-548d-461b-a03a-7a44ca1d57b6"
+			]
+		]
+	}
+}
