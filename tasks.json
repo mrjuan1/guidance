@@ -54,11 +54,11 @@
 				},
 				{
 					"details": "On/off states",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Toggling",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "3D model",
