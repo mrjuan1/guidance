@@ -1,3 +1,8 @@
 [submodule "kanban_tasks"]
 	path = addons/kanban_tasks
 	url = https://github.com/HolonProduction/godot_kanban_tasks
+
+[submodule "Godot-Prototype-Texture"]
+	path = addons/Godot-Prototype-Texture
+	url = https://github.com/PiCode9560/Godot-Prototype-Texture
+	branch = SVG

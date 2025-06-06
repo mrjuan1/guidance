@@ -13,6 +13,7 @@ config_version=5
 config/name="Guidance"
 config/description="A Mini Gim #3 game jam project"
 config/tags=PackedStringArray("game_jam", "mini_gim_#3")
+run/main_scene="uid://usl61yy6ba2f"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -43,7 +44,7 @@ enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg")
 
 interact={
 "deadzone": 0.2,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(367, 18),"global_position":Vector2(376, 66),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(306, 27),"global_position":Vector2(318, 87),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
 cancel={
@@ -86,3 +87,7 @@ quit={
 
 3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
+
+[rendering]
+
+textures/default_filters/anisotropic_filtering_level=4

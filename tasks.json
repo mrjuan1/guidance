@@ -21,7 +21,6 @@
 			"uuid": "e9b6ce0a-dde5-4adb-bd7f-c076329b5f11",
 			"title": "Todo",
 			"tasks": [
-				"f6e53c2b-785e-4714-bea1-20ad0fdaf011",
 				"73c7248f-0961-45e3-af73-a98d5f6c2880",
 				"30e3fb79-9205-48e3-8305-49b58d9ce836",
 				"3d014ec7-d84a-43c5-b4b3-338291fa6228"
@@ -35,12 +34,9 @@
 		{
 			"uuid": "d85997a6-18f5-492e-b32f-79140b4ae621",
 			"title": "Done",
-			"tasks": []
-		},
-		{
-			"uuid": "51853d8d-548d-461b-a03a-7a44ca1d57b6",
-			"title": "On Hold",
-			"tasks": []
+			"tasks": [
+				"f6e53c2b-785e-4714-bea1-20ad0fdaf011"
+			]
 		}
 	],
 	"tasks": [
@@ -98,23 +94,23 @@
 			"steps": [
 				{
 					"details": "Sample scene",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Camera panning",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Camera rotation",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Camera zooming",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Camera reset",
-					"done": false
+					"done": true
 				}
 			]
 		}
@@ -129,9 +125,6 @@
 			],
 			[
 				"d85997a6-18f5-492e-b32f-79140b4ae621"
-			],
-			[
-				"51853d8d-548d-461b-a03a-7a44ca1d57b6"
 			]
 		]
 	}
