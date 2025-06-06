@@ -86,7 +86,7 @@ quit={
 [physics]
 
 3d/physics_engine="Jolt Physics"
-common/physics_interpolation=true
+jolt_physics_3d/physics_interpolation=true
 
 [rendering]
 

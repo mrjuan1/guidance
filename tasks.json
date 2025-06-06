@@ -21,7 +21,6 @@
 			"uuid": "e9b6ce0a-dde5-4adb-bd7f-c076329b5f11",
 			"title": "Todo",
 			"tasks": [
-				"30e3fb79-9205-48e3-8305-49b58d9ce836",
 				"3d014ec7-d84a-43c5-b4b3-338291fa6228"
 			]
 		},
@@ -29,6 +28,7 @@
 			"uuid": "5328beaf-8c19-4c90-b681-4fd8dd2a3fcb",
 			"title": "In Progress",
 			"tasks": [
+				"30e3fb79-9205-48e3-8305-49b58d9ce836",
 				"73c7248f-0961-45e3-af73-a98d5f6c2880"
 			]
 		},
@@ -70,16 +70,45 @@
 				},
 				{
 					"details": "Interactive link",
-					"done": false
+					"done": true
 				}
 			]
 		},
 		{
 			"uuid": "30e3fb79-9205-48e3-8305-49b58d9ce836",
 			"title": "Chain placement",
-			"description": "",
+			"description": "Player can place chains from an object with a link to any other link. Chains can also be pinned on the ground to change their direction while placing. Clicking a link should activate chain placement. In this mode, a transparent (blue?) set of links will appear from the link to where the cursor is pointing on the ground. If it intersects anything, the colour will change (red?). Once placed, physics will be enabled for the chain links. They will also check the state of the source and destination links and transmit the source state to the destination state.",
 			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
-			"steps": []
+			"steps": [
+				{
+					"details": "3D model",
+					"done": true
+				},
+				{
+					"details": "Custom collision",
+					"done": true
+				},
+				{
+					"details": "Valid spawning",
+					"done": false
+				},
+				{
+					"details": "Automatic link creation",
+					"done": false
+				},
+				{
+					"details": "Obstacle detection",
+					"done": false
+				},
+				{
+					"details": "Placement detection and action",
+					"done": false
+				},
+				{
+					"details": "State detection",
+					"done": false
+				}
+			]
 		},
 		{
 			"uuid": "3d014ec7-d84a-43c5-b4b3-338291fa6228",
