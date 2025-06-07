@@ -20,7 +20,13 @@
 		{
 			"uuid": "e9b6ce0a-dde5-4adb-bd7f-c076329b5f11",
 			"title": "Todo",
-			"tasks": []
+			"tasks": [
+				"361597ba-d7b7-4aa9-80de-260846524bb6",
+				"c316ffd7-8a4a-4b24-aad3-ade6d35b6fe8",
+				"2217c11c-4f96-4d24-ae78-546169bcca8a",
+				"fb81165c-aec5-4185-a74d-92b2157884ed",
+				"45d13c06-33be-4753-81a9-0913be9d07dd"
+			]
 		},
 		{
 			"uuid": "5328beaf-8c19-4c90-b681-4fd8dd2a3fcb",
@@ -111,7 +117,7 @@
 		{
 			"uuid": "3d014ec7-d84a-43c5-b4b3-338291fa6228",
 			"title": "Light beacon",
-			"description": "",
+			"description": "Inherits the state of whatever's connected to it",
 			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
 			"steps": []
 		},
@@ -160,6 +166,117 @@
 				{
 					"details": "Listen on signal and print selected object",
 					"done": true
+				}
+			]
+		},
+		{
+			"uuid": "361597ba-d7b7-4aa9-80de-260846524bb6",
+			"title": "Characters",
+			"description": "A random range of characters should spawn around a power point when it's activated and move toward it. If it's deactivated, the characters should move away from it and despawn once far enough. Characters will automatically move to any linked light beacons if active. Unlinking a light beacon will cause the characters to run back to the last active node in the link (likely the power source).",
+			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
+			"steps": [
+				{
+					"details": "Character 3D models",
+					"done": false
+				},
+				{
+					"details": "Character animations",
+					"done": false
+				},
+				{
+					"details": "Character spawning",
+					"done": false
+				},
+				{
+					"details": "Character despawning",
+					"done": false
+				},
+				{
+					"details": "Character movement to light beacon",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "45d13c06-33be-4753-81a9-0913be9d07dd",
+			"title": "Removing chain pins",
+			"description": "Removing a chain pin should remove itself and the chain linked to it. At the moment, it stays and removes the chain going out from it.",
+			"category": "47d05e83-e571-4cdb-b6f9-35a3cebcddbb",
+			"steps": []
+		},
+		{
+			"uuid": "c316ffd7-8a4a-4b24-aad3-ade6d35b6fe8",
+			"title": "Override node",
+			"description": "This node has two input links and one output link. The node is active until both input links are powered. This will cause an override and disable this node. One link will cause characters to move to the node, as it'll still be active. A second link will deactivate it, causing the characters to move back to the last active node in the link.",
+			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
+			"steps": [
+				{
+					"details": "3D model",
+					"done": false
+				},
+				{
+					"details": "Input links",
+					"done": false
+				},
+				{
+					"details": "Output link",
+					"done": false
+				},
+				{
+					"details": "State updating",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "fb81165c-aec5-4185-a74d-92b2157884ed",
+			"title": "Black fog",
+			"description": "Black fog travels along active lines and can kill characters. It will always try to travel to the last active node in the link. If it kills any characters, the level will return to the last safe state.",
+			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
+			"steps": [
+				{
+					"details": "Black fog (particles?)",
+					"done": false
+				},
+				{
+					"details": "Animation",
+					"done": false
+				},
+				{
+					"details": "Movement",
+					"done": false
+				},
+				{
+					"details": "Attacking characters",
+					"done": false
+				},
+				{
+					"details": "Reloading last state",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "2217c11c-4f96-4d24-ae78-546169bcca8a",
+			"title": "State tracking and saving",
+			"description": "Keep track of the player's actions and store a state for each one. Allow reverting to any previous state. Doing this will destroy all states that follow the one being restored. Each state change updates a file soring all the states. Levels can be restarted by removing all states (?).",
+			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
+			"steps": [
+				{
+					"details": "Store level and setup new state for it",
+					"done": false
+				},
+				{
+					"details": "Store state on placing or removing nodes and links",
+					"done": false
+				},
+				{
+					"details": "Restore state by \"playing back\" states up to specified index",
+					"done": false
+				},
+				{
+					"details": "Level restarting",
+					"done": false
 				}
 			]
 		}
