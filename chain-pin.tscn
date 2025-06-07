@@ -1,15 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bacvf7oubd5xj"]
+[gd_scene load_steps=5 format=3 uid="uid://bacvf7oubd5xj"]
 
 [ext_resource type="Script" uid="uid://bb55ftci6a366" path="res://chain-pin.gd" id="1_m1f8c"]
-[ext_resource type="Texture2D" uid="uid://bse1pifi3p68n" path="res://addons/Godot-Prototype-Texture/addons/godot-prototype-texture/Vector/grid_512x512/grid_red_512x512.svg" id="2_l5bd8"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02nmi"]
-albedo_texture = ExtResource("2_l5bd8")
-uv1_triplanar = true
-texture_filter = 5
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbyrr"]
+emission_enabled = true
+emission = Color(0.32, 0.133333, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_d881s"]
-material = SubResource("StandardMaterial3D_02nmi")
+material = SubResource("StandardMaterial3D_xbyrr")
 size = Vector3(0.1, 0.75, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yewqo"]
@@ -26,3 +24,16 @@ mesh = SubResource("BoxMesh_d881s")
 [node name="ChainPinCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("BoxShape3D_yewqo")
+
+[node name="InactiveLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+light_color = Color(1, 0.415686, 0, 1)
+light_energy = 0.1
+omni_range = 1.0
+
+[node name="ActiveLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+visible = false
+light_color = Color(1, 0.9, 0, 1)
+light_energy = 0.05
+omni_range = 3.0

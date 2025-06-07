@@ -1,40 +1,37 @@
-[gd_scene load_steps=11 format=4 uid="uid://usl61yy6ba2f"]
+[gd_scene load_steps=10 format=4 uid="uid://usl61yy6ba2f"]
 
 [ext_resource type="Script" uid="uid://dgol7nvc5fcb4" path="res://camera-controller.gd" id="1_0411k"]
 [ext_resource type="Script" uid="uid://ly4j0cggcqd2" path="res://test-scene.gd" id="1_cp2na"]
-[ext_resource type="Texture2D" uid="uid://iota2oek3bqy" path="res://addons/Godot-Prototype-Texture/addons/godot-prototype-texture/Vector/grid_1024x1024/grid_black_1024x1024.svg" id="1_wn8ut"]
 [ext_resource type="PackedScene" uid="uid://i7s38eu2p7t7" path="res://power-source.tscn" id="4_cp2na"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hkptj"]
-sky_horizon_color = Color(0.684748, 0.701998, 0.725998, 1)
-ground_bottom_color = Color(0.2, 0.2, 0.2, 1)
-ground_horizon_color = Color(0.684748, 0.701998, 0.725998, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8amj3"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+energy_multiplier = 0.0
 
-[sub_resource type="Sky" id="Sky_0411k"]
-sky_material = SubResource("ProceduralSkyMaterial_hkptj")
+[sub_resource type="Sky" id="Sky_c5pbs"]
+sky_material = SubResource("ProceduralSkyMaterial_8amj3")
 
-[sub_resource type="Environment" id="Environment_wn8ut"]
+[sub_resource type="Environment" id="Environment_cp2na"]
 background_mode = 2
-sky = SubResource("Sky_0411k")
-tonemap_mode = 2
+sky = SubResource("Sky_c5pbs")
+tonemap_mode = 4
 ssao_enabled = true
 glow_enabled = true
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cp2na"]
 data = PackedVector3Array(-15, -0.5, 15, -15, -0.5, -15, -15, 0.5, -15, 15, -0.5, -15, -15, -0.5, -15, -15, -0.5, 15, -15, 0.5, -15, -15, -0.5, -15, 15, -0.5, -15, -15, 0.5, -15, -15, 0.5, 15, -15, -0.5, 15, -15, -0.5, 15, -15, 0.5, 15, 15, 0.5, 15, 15, 0.5, 15, -15, 0.5, 15, -15, 0.5, -15, -15, -0.5, 15, 15, -0.5, 15, 15, -0.5, -15, 15, 0.5, 15, 15, -0.5, 15, -15, -0.5, 15, 15, -0.5, -15, 15, -0.5, 15, 15, 0.5, 15, 15, -0.5, -15, 15, 0.5, -15, -15, 0.5, -15, -15, 0.5, -15, 15, 0.5, -15, 15, 0.5, 15, 15, 0.5, 15, 15, 0.5, -15, 15, -0.5, -15)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0411k"]
-albedo_texture = ExtResource("1_wn8ut")
-uv1_triplanar = true
-uv1_world_triplanar = true
-texture_filter = 5
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8amj3"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_02nmi"]
 _surfaces = [{
 "aabb": AABB(-15, -0.5, -15, 30, 1, 30),
 "attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
 "format": 34359738391,
-"material": SubResource("StandardMaterial3D_0411k"),
+"material": SubResource("StandardMaterial3D_8amj3"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 36,
@@ -45,20 +42,16 @@ _surfaces = [{
 script = ExtResource("1_cp2na")
 
 [node name="Environment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_wn8ut")
-
-[node name="Light" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-shadow_enabled = true
+environment = SubResource("Environment_cp2na")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 2
 
-[node name="GroundMesh" type="CollisionShape3D" parent="Ground"]
+[node name="GroundCollision" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("ConcavePolygonShape3D_cp2na")
 
-[node name="GroundCollision" type="MeshInstance3D" parent="Ground"]
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("ArrayMesh_02nmi")
 skeleton = NodePath("../..")
 

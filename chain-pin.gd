@@ -3,6 +3,8 @@ extends StaticBody3D
 
 @export var camera: Camera3D
 @export var camera_ray_cast: RayCast3D
+@export var _active_colour: Color = Color(1.0, 0.9, 0.0)
+@export var _inactive_colour: Color = Color(0.32, 0.133, 0.0)
 
 const _HALF_PI = PI / 2.0
 const _QUARTER_PI = _HALF_PI / 2.0
@@ -11,10 +13,18 @@ var input_chain: Chain
 var _chain_placement_instance: ChainPlacement
 var _linked: bool = false
 var _chain: Chain
+var _active: bool = false
 
 @onready var _chain_placement: PackedScene = load("res://chain-placement.tscn")
 @onready var _chain_link: PackedScene = load("res://chain-link.tscn")
 @onready var _chain_pin: PackedScene = load("res://chain-pin.tscn")
+@onready var _chain_pin_mesh: MeshInstance3D = $ChainPinMesh
+@onready var _material: StandardMaterial3D = _chain_pin_mesh.get_active_material(0).duplicate()
+@onready var _inactive_light: OmniLight3D = $InactiveLight
+@onready var _active_light: OmniLight3D = $ActiveLight
+
+func _ready() -> void:
+	_chain_pin_mesh.set_surface_override_material(0, _material)
 
 func interact(interacting: bool) -> void:
 	if interacting and not GlobalStates.linking and not _linked:
@@ -32,6 +42,23 @@ func interact(interacting: bool) -> void:
 		GlobalStates.linking = true
 	elif not interacting:
 		unlink()
+
+func set_active(active) -> void:
+	_active = active
+	if _active:
+		_material.emission = _active_colour
+		_inactive_light.visible = false
+		_active_light.visible = true
+	else:
+		_material.emission = _inactive_colour
+		_inactive_light.visible = true
+		_active_light.visible = false
+
+	if _chain:
+		for link: ChainLink in _chain.get_children():
+			link.set_active(_active)
+		if _chain.destination:
+			_chain.destination.call("set_active", _active)
 
 func _on_chain_placed(cancelled: bool, links: int = 0, direction: Vector3 = Vector3.ZERO, end_position: Vector3 = Vector3.ZERO) -> void:
 	if not cancelled:
@@ -74,6 +101,10 @@ func _place_chain(links: int, direction: Vector3, end_position: Vector3) -> void
 	root.add_child(chain_pin)
 
 	_chain.destination = chain_pin
+
+	for link: ChainLink in _chain.get_children():
+		link.set_active(_active)
+	chain_pin.set_active(_active)
 
 func unlink() -> void:
 	if _linked:

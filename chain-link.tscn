@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://c8601s8i2w7px"]
+[gd_scene load_steps=9 format=4 uid="uid://c8601s8i2w7px"]
+
+[ext_resource type="Script" uid="uid://coxlco54lb6mk" path="res://chain-link.gd" id="1_0tnik"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pjpm8"]
 
@@ -34,6 +36,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_vc16y")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kiika"]
+emission_enabled = true
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_cp2na"]
 height = 0.22
 radius = 0.05
@@ -49,11 +54,13 @@ radius = 0.044
 [node name="ChainLink" type="RigidBody3D"]
 collision_mask = 3
 input_ray_pickable = false
+script = ExtResource("1_0tnik")
 
 [node name="ChainLinkMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20647, 0, 0)
 mesh = SubResource("ArrayMesh_7blbn")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_kiika")
 
 [node name="ChainLinkCollision1" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -0.206467, 0, -0.12)
@@ -86,3 +93,16 @@ shape = SubResource("CylinderShape3D_d881s")
 [node name="ChainLinkCollision8" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.50302, -0.864275, 3.77787e-08, 0, -4.37114e-08, -1, 0.864275, 0.50302, -2.19877e-08, -0.0524669, 0, 0.095)
 shape = SubResource("CylinderShape3D_d881s")
+
+[node name="InactiveLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.203007, 0, 0)
+light_color = Color(1, 0.415686, 0, 1)
+light_energy = 0.05
+omni_range = 0.35
+
+[node name="ActiveLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.196086, 0, 0)
+visible = false
+light_color = Color(1, 0.9, 0, 1)
+light_energy = 0.05
+omni_range = 3.0

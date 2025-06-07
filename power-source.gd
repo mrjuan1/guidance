@@ -5,8 +5,11 @@ extends StaticBody3D
 
 signal state_toggled(active: bool)
 
-const _INACTIVE_COLOUR: String = "blue"
-const _ACTIVE_COLOUR: String = "yellow"
+@onready var _inactive_face_colour: Color = Color(1.0, 0.417, 0.0)
+@onready var _active_face_colour: Color = Color(1.0, 0.9, 0.0)
+@onready var _inactive_light_colour: Color = Color(1.0, 0.0, 0.0)
+@onready var _active_light_colour: Color = Color(0.0, 1.0, 0.0)
+
 const _HALF_PI = PI / 2.0
 const _QUARTER_PI = _HALF_PI / 2.0
 
@@ -15,10 +18,14 @@ var _chain_placement_instance: ChainPlacement
 var _linked: bool = false
 var _chain: Chain
 
-@onready var _mesh: MeshInstance3D = $Mesh
-@onready var _material: StandardMaterial3D = _mesh.get_active_material(0) as StandardMaterial3D
-@onready var _inactive_texture: Texture2D = load(_material.albedo_texture.resource_path)
-@onready var _active_texture: Texture2D = load(_material.albedo_texture.resource_path.replace(_INACTIVE_COLOUR, _ACTIVE_COLOUR))
+@onready var _faces_mesh: MeshInstance3D = $BoxFaces
+@onready var _faces_material: StandardMaterial3D = _faces_mesh.get_active_material(0) as StandardMaterial3D
+@onready var _light_mesh: MeshInstance3D = $Light
+@onready var _light_material: StandardMaterial3D = _light_mesh.get_active_material(0) as StandardMaterial3D
+@onready var _chain_link_mesh: MeshInstance3D = %ChainLinkMesh
+@onready var _link_material: StandardMaterial3D = _chain_link_mesh.get_active_material(0) as StandardMaterial3D
+@onready var _inactive_light: OmniLight3D = $InactiveLight
+@onready var _active_light: OmniLight3D = $ActiveLight
 @onready var _chain_placement: PackedScene = preload("res://chain-placement.tscn")
 @onready var _chain_link: PackedScene = preload("res://chain-link.tscn")
 @onready var _chain_pin: PackedScene = preload("res://chain-pin.tscn")
@@ -27,9 +34,23 @@ func interact(interacting: bool) -> void:
 	if interacting and not GlobalStates.linking:
 		_active = !_active
 		if _active:
-			_material.albedo_texture = _active_texture
+			_faces_material.emission = _active_face_colour
+			_light_material.emission = _active_light_colour
+			_link_material.emission = _active_face_colour
+			_inactive_light.visible = false
+			_active_light.visible = true
 		else:
-			_material.albedo_texture = _inactive_texture
+			_faces_material.emission = _inactive_face_colour
+			_light_material.emission = _inactive_light_colour
+			_link_material.emission = _inactive_face_colour
+			_inactive_light.visible = true
+			_active_light.visible = false
+
+		if _chain:
+			for link: ChainLink in _chain.get_children():
+				link.set_active(_active)
+			if _chain.destination:
+				_chain.destination.call("set_active", _active)
 
 		state_toggled.emit(_active)
 
@@ -66,7 +87,7 @@ func _place_chain(links: int, direction: Vector3, end_position: Vector3) -> void
 	_chain.source = self
 
 	for i: int in links:
-		var link_instance: Node3D = _chain_link.instantiate()
+		var link_instance: ChainLink = _chain_link.instantiate()
 		link_instance.position = direction * (float(i) / float(links))
 		link_instance.position.y = 0.0
 		link_instance.rotation.y = atan2(direction.x, direction.z) + _HALF_PI
@@ -92,6 +113,10 @@ func _place_chain(links: int, direction: Vector3, end_position: Vector3) -> void
 	root.add_child(chain_pin)
 
 	_chain.destination = chain_pin
+
+	for link: ChainLink in _chain.get_children():
+		link.set_active(_active)
+	chain_pin.set_active(_active)
 
 func unlink() -> void:
 	if _linked:
