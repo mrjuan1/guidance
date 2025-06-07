@@ -3,8 +3,6 @@ extends StaticBody3D
 @export var _camera: Camera3D
 @export var _camera_ray_cast: RayCast3D
 
-signal state_toggled(active: bool)
-
 @onready var _inactive_face_colour: Color = Color(1.0, 0.417, 0.0)
 @onready var _active_face_colour: Color = Color(1.0, 0.9, 0.0)
 @onready var _inactive_light_colour: Color = Color(1.0, 0.0, 0.0)
@@ -52,8 +50,6 @@ func interact(interacting: bool) -> void:
 			if _chain.destination:
 				_chain.destination.call("set_active", _active)
 
-		state_toggled.emit(_active)
-
 func _on_power_source_out_output_selected(interacting: bool) -> void:
 	if interacting and not GlobalStates.linking and not _linked:
 		_chain_placement_instance = _chain_placement.instantiate()
@@ -71,16 +67,32 @@ func _on_power_source_out_output_selected(interacting: bool) -> void:
 	elif not interacting:
 		unlink()
 
-func _on_chain_placed(cancelled: bool, links: int = 0, direction: Vector3 = Vector3.ZERO, end_position: Vector3 = Vector3.ZERO) -> void:
+func _on_chain_placed(
+	cancelled: bool,
+	start: Vector3 = Vector3.ZERO,
+	end: Vector3 = Vector3.ZERO,
+	target: Node3D = null
+) -> void:
 	if not cancelled:
-		_place_chain(links, direction, end_position)
+		if target:
+			var actual_target: Node3D = target
+			if actual_target is LightBeacon:
+				actual_target = actual_target.find_child("ChainLink")
+			_place_chain(start, actual_target.global_position, actual_target)
+		else:
+			_place_chain(start, end)
+
 		_linked = true
 
 	_chain_placement_instance.chain_placed.disconnect(_on_chain_placed)
 	_chain_placement_instance.queue_free()
 	GlobalStates.linking = false
 
-func _place_chain(links: int, direction: Vector3, end_position: Vector3) -> void:
+func _place_chain(start: Vector3, end: Vector3, target: Node3D = null) -> void:
+	var direction: Vector3 = end - start
+	var distance: float = direction.length()
+	var links: int = max(1, int(distance / GlobalStates.CHAIN_LENGTH))
+
 	_chain = Chain.new()
 	_chain.position = position
 	_chain.position.x += 0.6
@@ -105,24 +117,34 @@ func _place_chain(links: int, direction: Vector3, end_position: Vector3) -> void
 		parents_parent = parents_parent.get_parent_node_3d()
 	root.add_child(_chain)
 
-	var chain_pin: ChainPin = _chain_pin.instantiate()
-	chain_pin.global_position = end_position
-	chain_pin.camera = _camera
-	chain_pin.camera_ray_cast = _camera_ray_cast
-	chain_pin.input_chain = _chain
-	root.add_child(chain_pin)
-
-	_chain.destination = chain_pin
-
 	for link: ChainLink in _chain.get_children():
 		link.set_active(_active)
-	chain_pin.set_active(_active)
 
-func unlink() -> void:
+	if target:
+		if target.name == "ChainLink" or target is LightBeaconIn:
+			var light_beacon: LightBeacon = target.get_parent_node_3d()
+			light_beacon.input_chain = _chain
+			light_beacon.input_chain.destination = light_beacon
+			light_beacon.set_active(_active)
+		else:
+			print("Unknown target: ", target)
+	else:
+		var chain_pin: ChainPin = _chain_pin.instantiate()
+		chain_pin.global_position = end
+		chain_pin.camera = _camera
+		chain_pin.camera_ray_cast = _camera_ray_cast
+		chain_pin.input_chain = _chain
+		root.add_child(chain_pin)
+
+		_chain.destination = chain_pin
+		chain_pin.set_active(_active)
+
+func unlink(_keep_source: bool = false) -> void:
 	if _linked:
 		if _chain.destination:
 			_chain.source = null
 			if _chain.destination.has_method("unlink"):
 				_chain.destination.call("unlink")
+
 		_chain.queue_free()
 		_linked = false

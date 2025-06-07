@@ -1,12 +1,11 @@
 class_name ChainPlacement
 extends Node3D
 
-signal chain_placed(cancelled: bool, links: int, direction: Vector3, end_position: Vector3)
+signal chain_placed(cancelled: bool, start: Vector3, end: Vector3, target: Node3D)
 
 @export var camera: Camera3D
 @export var camera_ray_cast: RayCast3D
 @export var _ray_length: float = 20.0
-@export var _chain_length: float = 0.25
 @export var _placement_colour: Color = Color(0.0, 0.5, 1.0, 0.792)
 @export var _collision_colour: Color = Color(1.0, 0.388, 0.388, 0.682)
 
@@ -22,7 +21,7 @@ var _link_instances: Array[Node3D] = []
 @onready var _chain_pin: StaticBody3D = $ChainPin
 
 func _ready() -> void:
-	_place_links(_initial_position, _initial_position)
+	_place_links(_initial_position, _initial_position, true)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and camera and camera_ray_cast:
@@ -37,24 +36,29 @@ func _input(event: InputEvent) -> void:
 
 		if camera_ray_cast.is_colliding():
 			var collision_position: Vector3 = camera_ray_cast.get_collision_point()
-			_place_links(_initial_position, collision_position)
+			var collider: Object = camera_ray_cast.get_collider()
+			var is_pin = collider is not LightBeacon and collider is not LightBeaconIn
+			_place_links(_initial_position, collision_position, is_pin)
 	elif event is InputEventMouseButton:
-		if event.is_action("interact") and _input_relative.is_zero_approx() and not _chain_placement_ray_cast.is_colliding():
+		if event.is_action("interact") and _input_relative.is_zero_approx():
 			var collision_position: Vector3 = camera_ray_cast.get_collision_point()
-			var direction: Vector3 = collision_position - _initial_position
-			var distance: float = direction.length()
-			var links: int = max(1, int(distance / _chain_length))
+			var collider: Object = camera_ray_cast.get_collider()
+			var is_pin = collider is not LightBeacon and collider is not LightBeaconIn
 
-			chain_placed.emit(false, links, direction, collision_position)
+			var colliding: bool = _chain_placement_ray_cast.is_colliding()
+			if colliding and not is_pin:
+				chain_placed.emit(false, _initial_position, collision_position, collider)
+			elif not colliding and is_pin:
+				chain_placed.emit(false, _initial_position, collision_position)
 		elif event.is_action("cancel"):
 			chain_placed.emit(true)
 
 		_input_relative = Vector2.ZERO
 
-func _place_links(start: Vector3, end: Vector3) -> void:
+func _place_links(start: Vector3, end: Vector3, place_pin: bool) -> void:
 	var direction: Vector3 = end - start
 	var distance: float = direction.length()
-	var links: int = max(1, int(distance / _chain_length))
+	var links: int = max(1, int(distance / GlobalStates.CHAIN_LENGTH))
 
 	if links != _last_links:
 		if links > _last_links:
@@ -88,10 +92,14 @@ func _place_links(start: Vector3, end: Vector3) -> void:
 
 		var mesh: MeshInstance3D = link_instance.get_child(0) as MeshInstance3D
 		var material: StandardMaterial3D = mesh.get_active_material(0) as StandardMaterial3D
-		if _chain_placement_ray_cast.is_colliding():
+		if _chain_placement_ray_cast.is_colliding() and place_pin:
 			material.albedo_color = _collision_colour
 		else:
 			material.albedo_color = _placement_colour
 
-	_chain_pin.global_position = end
-	_chain_pin.global_position.y = 0.0
+	if place_pin:
+		_chain_pin.global_position = end
+		_chain_pin.global_position.y = 0.0
+		_chain_pin.visible = true
+	else:
+		_chain_pin.visible = false
