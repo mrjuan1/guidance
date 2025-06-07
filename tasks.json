@@ -90,15 +90,15 @@
 				},
 				{
 					"details": "Valid spawning",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Automatic link creation",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Obstacle detection",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Placement detection and action",

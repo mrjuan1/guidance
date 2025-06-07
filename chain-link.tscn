@@ -47,41 +47,42 @@ height = 0.15
 radius = 0.044
 
 [node name="ChainLink" type="RigidBody3D"]
+collision_mask = 3
 input_ray_pickable = false
 
 [node name="ChainLinkMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20647, 0, 0)
 mesh = SubResource("ArrayMesh_7blbn")
 skeleton = NodePath("")
 
 [node name="ChainLinkCollision1" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, -0.12)
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -0.206467, 0, -0.12)
 shape = SubResource("CylinderShape3D_cp2na")
 
 [node name="ChainLinkCollision2" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0.12)
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -0.206467, 0, 0.12)
 shape = SubResource("CylinderShape3D_cp2na")
 
 [node name="ChainLinkCollision3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.197, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.00946692, 0, 0)
 shape = SubResource("CylinderShape3D_02nmi")
 
 [node name="ChainLinkCollision4" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.197, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.403467, 0, 0)
 shape = SubResource("CylinderShape3D_02nmi")
 
 [node name="ChainLinkCollision5" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.503231, -0.864152, 3.77733e-08, -1.53271e-15, -4.37114e-08, -1, 0.864152, 0.503231, -2.19969e-08, -0.154, 0, -0.095)
+transform = Transform3D(0.503231, -0.864152, 3.77733e-08, -1.53271e-15, -4.37114e-08, -1, 0.864152, 0.503231, -2.19969e-08, -0.360467, 0, -0.095)
 shape = SubResource("CylinderShape3D_d881s")
 
 [node name="ChainLinkCollision6" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.50302, 0.864275, -3.77787e-08, 0, -4.37114e-08, -1, -0.864275, 0.50302, -2.19877e-08, 0.154, 0, -0.095)
+transform = Transform3D(0.50302, 0.864275, -3.77787e-08, 0, -4.37114e-08, -1, -0.864275, 0.50302, -2.19877e-08, -0.0524669, 0, -0.095)
 shape = SubResource("CylinderShape3D_d881s")
 
 [node name="ChainLinkCollision7" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.50302, 0.864275, -3.77787e-08, 0, -4.37114e-08, -1, -0.864275, 0.50302, -2.19877e-08, -0.154, 0, 0.095)
+transform = Transform3D(0.50302, 0.864275, -3.77787e-08, 0, -4.37114e-08, -1, -0.864275, 0.50302, -2.19877e-08, -0.360467, 0, 0.095)
 shape = SubResource("CylinderShape3D_d881s")
 
 [node name="ChainLinkCollision8" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.50302, -0.864275, 3.77787e-08, 0, -4.37114e-08, -1, 0.864275, 0.50302, -2.19877e-08, 0.154, 0, 0.095)
+transform = Transform3D(0.50302, -0.864275, 3.77787e-08, 0, -4.37114e-08, -1, 0.864275, 0.50302, -2.19877e-08, -0.0524669, 0, 0.095)
 shape = SubResource("CylinderShape3D_d881s")

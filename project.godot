@@ -17,6 +17,10 @@ run/main_scene="uid://usl61yy6ba2f"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalStates="*res://global-states.gd"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=1

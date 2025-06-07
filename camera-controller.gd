@@ -1,7 +1,8 @@
 extends Node3D
 
 @export var _camera: Camera3D
-@export var _ray_cast: RayCast3D
+@export var _camera_ray_cast: RayCast3D
+@export var _ray_length: float = 20.0
 
 @export_group("Initial values")
 @export var _initial_position: Vector3 = Vector3.ZERO
@@ -23,8 +24,6 @@ extends Node3D
 @export var _min_zoom: float = 2.0
 @export var _max_zoom: float = 8.0
 
-const _RAY_LENGTH: float = 10.0
-
 var _input_velocity: Vector2 = Vector2.ZERO
 var _moving: bool = false
 var _rotating: bool = false
@@ -39,30 +38,37 @@ func _input(event: InputEvent) -> void:
 		_input_velocity = (event as InputEventMouseMotion).relative
 	elif event is InputEventMouseButton:
 		var button_event: InputEventMouseButton = event as InputEventMouseButton
-		if button_event.is_action_released("interact"):
-			_input_position = button_event.position
+		_input_position = button_event.position
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("interact"):
 		if not _input_velocity.is_zero_approx():
 			_moving = true
 	elif Input.is_action_just_released("interact"):
-		if _moving:
-			_moving = false
-		else:
-			var from: Vector3 = _camera.project_ray_origin(_input_position)
-			var to: Vector3 = from + (_camera.project_ray_normal(_input_position) * _RAY_LENGTH)
-			_ray_cast.look_at_from_position(from, to, Vector3.UP)
-			_ray_cast.force_raycast_update()
-			if _ray_cast.is_colliding():
-				var collider: Object = _ray_cast.get_collider()
-				if collider.has_method("interact"):
-					collider.call("interact")
+		_moving = false
+
+		var from: Vector3 = _camera.project_ray_origin(_input_position)
+		var to: Vector3 = from + (_camera.project_ray_normal(_input_position) * _ray_length)
+		_camera_ray_cast.look_at_from_position(from, to, Vector3.UP)
+		_camera_ray_cast.force_raycast_update()
+		if _camera_ray_cast.is_colliding():
+			var collider: Object = _camera_ray_cast.get_collider()
+			if collider.has_method("interact"):
+				collider.call("interact", true)
 	elif Input.is_action_pressed("cancel"):
 		if not _input_velocity.is_zero_approx():
 			_rotating = true
 	elif Input.is_action_just_released("cancel"):
 		_rotating = false
+
+		var from: Vector3 = _camera.project_ray_origin(_input_position)
+		var to: Vector3 = from + (_camera.project_ray_normal(_input_position) * _ray_length)
+		_camera_ray_cast.look_at_from_position(from, to, Vector3.UP)
+		_camera_ray_cast.force_raycast_update()
+		if _camera_ray_cast.is_colliding():
+			var collider: Object = _camera_ray_cast.get_collider()
+			if collider.has_method("interact"):
+				collider.call("interact", false)
 	elif Input.is_action_just_pressed("zoom_in"):
 		_target_zoom = clampf(_target_zoom - 1.0, _min_zoom, _max_zoom)
 	elif Input.is_action_just_pressed("zoom_out"):
