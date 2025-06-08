@@ -89,6 +89,11 @@ func _on_chain_placed(
 			var actual_target: Node3D = target
 			if actual_target is LightBeacon:
 				actual_target = actual_target.find_child("ChainLink")
+			elif actual_target is LongBox:
+				if not actual_target.input_chain1:
+					actual_target = actual_target.find_child("LongBoxChainLinkIn1")
+				else:
+					actual_target = actual_target.find_child("LongBoxChainLinkIn2")
 			_place_chain(start, actual_target.global_position, actual_target)
 		else:
 			_place_chain(start, end)
@@ -132,6 +137,26 @@ func _place_chain(start: Vector3, end: Vector3, target: Node3D = null) -> void:
 			light_beacon.input_chain = _chain
 			light_beacon.input_chain.destination = light_beacon
 			light_beacon.set_active(_active)
+		if target is LongBoxIn:
+			var long_box_chain_link: Node3D = target.get_parent_node_3d()
+			var long_box: LongBox = long_box_chain_link.get_parent_node_3d()
+			if long_box_chain_link.name == "LongBoxChainLinkIn1":
+				long_box.input_chain1 = _chain
+				long_box.input_chain1.destination = long_box
+			elif long_box_chain_link.name == "LongBoxChainLinkIn2":
+				long_box.input_chain2 = _chain
+				long_box.input_chain2.destination = long_box
+			long_box.set_active()
+		elif target.name == "LongBoxChainLinkIn1":
+			var long_box: LongBox = target.get_parent()
+			long_box.input_chain1 = _chain
+			long_box.input_chain1.destination = long_box
+			long_box.set_active()
+		elif target.name == "LongBoxChainLinkIn2":
+			var long_box: LongBox = target.get_parent()
+			long_box.input_chain2 = _chain
+			long_box.input_chain2.destination = long_box
+			long_box.set_active()
 		else:
 			print("Unknown target: ", target)
 	else:

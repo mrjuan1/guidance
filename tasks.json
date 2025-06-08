@@ -21,7 +21,6 @@
 			"uuid": "e9b6ce0a-dde5-4adb-bd7f-c076329b5f11",
 			"title": "Todo",
 			"tasks": [
-				"c316ffd7-8a4a-4b24-aad3-ade6d35b6fe8",
 				"2217c11c-4f96-4d24-ae78-546169bcca8a",
 				"fb81165c-aec5-4185-a74d-92b2157884ed",
 				"45d13c06-33be-4753-81a9-0913be9d07dd",
@@ -32,6 +31,7 @@
 			"uuid": "5328beaf-8c19-4c90-b681-4fd8dd2a3fcb",
 			"title": "In Progress",
 			"tasks": [
+				"c316ffd7-8a4a-4b24-aad3-ade6d35b6fe8",
 				"361597ba-d7b7-4aa9-80de-260846524bb6"
 			]
 		},
@@ -214,11 +214,11 @@
 			"steps": [
 				{
 					"details": "3D model",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Input links",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Output link",
@@ -226,7 +226,7 @@
 				},
 				{
 					"details": "State updating",
-					"done": false
+					"done": true
 				}
 			]
 		},

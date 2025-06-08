@@ -11,8 +11,8 @@ const _QUARTER_PI = _HALF_PI / 2.0
 
 var input_chain: Chain
 var _chain_placement_instance: ChainPlacement
-var _linked: bool = false
-var _chain: Chain
+var _chain1: Chain
+var _chain2: Chain
 var _active: bool = false
 
 @onready var _chain_placement: PackedScene = load("res://chain-placement.tscn")
@@ -27,7 +27,7 @@ func _ready() -> void:
 	_chain_pin_mesh.set_surface_override_material(0, _material)
 
 func interact(interacting: bool) -> void:
-	if interacting and not GlobalStates.linking and not _linked:
+	if interacting and not GlobalStates.linking and (not _chain1 or not _chain2):
 		_chain_placement_instance = _chain_placement.instantiate()
 		_chain_placement_instance.position = position
 		_chain_placement_instance.position.y = 0.5
@@ -54,11 +54,17 @@ func set_active(active) -> void:
 		_inactive_light.visible = true
 		_active_light.visible = false
 
-	if _chain:
-		for link: ChainLink in _chain.get_children():
+	if _chain1:
+		for link: ChainLink in _chain1.get_children():
 			link.set_active(_active)
-		if _chain.destination:
-			_chain.destination.call("set_active", _active)
+		if _chain1.destination:
+			_chain1.destination.call("set_active", _active)
+
+	if _chain2:
+		for link: ChainLink in _chain2.get_children():
+			link.set_active(_active)
+		if _chain2.destination:
+			_chain2.destination.call("set_active", _active)
 
 func _on_chain_placed(
 	cancelled: bool,
@@ -71,11 +77,14 @@ func _on_chain_placed(
 			var actual_target: Node3D = target
 			if actual_target is LightBeacon:
 				actual_target = actual_target.find_child("ChainLink")
+			elif actual_target is LongBox:
+				if not actual_target.input_chain1:
+					actual_target = actual_target.find_child("LongBoxChainLinkIn1")
+				else:
+					actual_target = actual_target.find_child("LongBoxChainLinkIn2")
 			_place_chain(start, actual_target.global_position, actual_target)
 		else:
 			_place_chain(start, end)
-
-		_linked = true
 
 	_chain_placement_instance.chain_placed.disconnect(_on_chain_placed)
 	_chain_placement_instance.queue_free()
@@ -86,9 +95,9 @@ func _place_chain(start: Vector3, end: Vector3, target: Node3D = null) -> void:
 	var distance: float = direction.length()
 	var links: int = max(1, int(distance / GlobalStates.CHAIN_LENGTH))
 
-	_chain = Chain.new()
-	_chain.position = position - (direction * (0.75 / float(links)))
-	_chain.source = self
+	var chain: Chain = Chain.new()
+	chain.position = position - (direction * (0.75 / float(links)))
+	chain.source = self
 
 	var extra_chains: int = 1
 	if target and target.name == "ChainLink" or target is LightBeaconIn:
@@ -104,24 +113,44 @@ func _place_chain(start: Vector3, end: Vector3, target: Node3D = null) -> void:
 		else:
 			link_instance.rotation.x = -_QUARTER_PI
 
-		_chain.add_child(link_instance)
+		chain.add_child(link_instance)
 
 	var root: Node3D = get_parent_node_3d()
 	var parents_parent: Node3D = root.get_parent_node_3d()
 	while parents_parent:
 		root = parents_parent
 		parents_parent = parents_parent.get_parent_node_3d()
-	root.add_child(_chain)
+	root.add_child(chain)
 
-	for link: ChainLink in _chain.get_children():
+	for link: ChainLink in chain.get_children():
 		link.set_active(_active)
 
 	if target:
 		if target.name == "ChainLink" or target is LightBeaconIn:
 			var light_beacon: LightBeacon = target.get_parent_node_3d()
-			light_beacon.input_chain = _chain
+			light_beacon.input_chain = chain
 			light_beacon.input_chain.destination = light_beacon
 			light_beacon.set_active(_active)
+		if target is LongBoxIn:
+			var long_box_chain_link: Node3D = target.get_parent_node_3d()
+			var long_box: LongBox = long_box_chain_link.get_parent_node_3d()
+			if long_box_chain_link.name == "LongBoxChainLinkIn1":
+				long_box.input_chain1 = chain
+				long_box.input_chain1.destination = long_box
+			elif long_box_chain_link.name == "LongBoxChainLinkIn2":
+				long_box.input_chain2 = chain
+				long_box.input_chain2.destination = long_box
+			long_box.set_active()
+		elif target.name == "LongBoxChainLinkIn1":
+			var long_box: LongBox = target.get_parent()
+			long_box.input_chain1 = chain
+			long_box.input_chain1.destination = long_box
+			long_box.set_active()
+		elif target.name == "LongBoxChainLinkIn2":
+			var long_box: LongBox = target.get_parent()
+			long_box.input_chain2 = chain
+			long_box.input_chain2.destination = long_box
+			long_box.set_active()
 		else:
 			print("Unknown target: ", target)
 	else:
@@ -129,20 +158,31 @@ func _place_chain(start: Vector3, end: Vector3, target: Node3D = null) -> void:
 		chain_pin.global_position = end
 		chain_pin.camera = camera
 		chain_pin.camera_ray_cast = camera_ray_cast
-		chain_pin.input_chain = _chain
+		chain_pin.input_chain = chain
 		root.add_child(chain_pin)
 
-		_chain.destination = chain_pin
+		chain.destination = chain_pin
 		chain_pin.set_active(_active)
 
+	if not _chain1:
+		_chain1 = chain
+	elif not _chain2:
+		_chain2 = chain
+
 func unlink(keep_source: bool = false) -> void:
-	if _linked:
-		if _chain.destination:
-			_chain.source = null
-			if _chain.destination.has_method("unlink"):
-				_chain.destination.call("unlink")
-		_chain.queue_free()
-		_linked = false
+	if _chain1:
+		if _chain1.destination:
+			_chain1.source = null
+			if _chain1.destination.has_method("unlink"):
+				_chain1.destination.call("unlink")
+		_chain1.queue_free()
+
+	if _chain2:
+		if _chain2.destination:
+			_chain2.source = null
+			if _chain2.destination.has_method("unlink"):
+				_chain2.destination.call("unlink")
+		_chain2.queue_free()
 
 	if not keep_source:
 		if input_chain and input_chain.source:

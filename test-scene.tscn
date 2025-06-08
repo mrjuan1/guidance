@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://usl61yy6ba2f"]
+[gd_scene load_steps=11 format=3 uid="uid://usl61yy6ba2f"]
 
 [ext_resource type="Script" uid="uid://dgol7nvc5fcb4" path="res://camera-controller.gd" id="1_0411k"]
 [ext_resource type="Script" uid="uid://ly4j0cggcqd2" path="res://test-scene.gd" id="1_cp2na"]
 [ext_resource type="PackedScene" uid="uid://drb0x7bix0ur4" path="res://light-beacon.tscn" id="4_c5pbs"]
 [ext_resource type="PackedScene" uid="uid://i7s38eu2p7t7" path="res://power-source.tscn" id="4_cp2na"]
+[ext_resource type="PackedScene" uid="uid://b5jvmxrm46llo" path="res://long-box.tscn" id="5_cp2na"]
 
 [sub_resource type="Environment" id="Environment_cp2na"]
 background_mode = 1
@@ -68,3 +69,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.5, -2.006)
 [node name="Far" type="Node3D" parent="NavigationRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.84835, 9.53674e-07, -7.81074)
 visible = false
+
+[node name="LongBox" parent="." instance=ExtResource("5_cp2na")]
+transform = Transform3D(-0.999998, 0, 0.00186777, 0, 1, 0, -0.00186777, 0, -0.999998, 0.888917, 0.5, 2.87427)
