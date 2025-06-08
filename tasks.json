@@ -190,11 +190,11 @@
 					"done": true
 				},
 				{
-					"details": "Character despawning",
-					"done": false
+					"details": "Character movement to light beacon",
+					"done": true
 				},
 				{
-					"details": "Character movement to light beacon",
+					"details": "Character despawning",
 					"done": false
 				}
 			]
