@@ -21,17 +21,19 @@
 			"uuid": "e9b6ce0a-dde5-4adb-bd7f-c076329b5f11",
 			"title": "Todo",
 			"tasks": [
-				"361597ba-d7b7-4aa9-80de-260846524bb6",
 				"c316ffd7-8a4a-4b24-aad3-ade6d35b6fe8",
 				"2217c11c-4f96-4d24-ae78-546169bcca8a",
 				"fb81165c-aec5-4185-a74d-92b2157884ed",
-				"45d13c06-33be-4753-81a9-0913be9d07dd"
+				"45d13c06-33be-4753-81a9-0913be9d07dd",
+				"2788996c-5560-4fc5-838a-14501f7f8d55"
 			]
 		},
 		{
 			"uuid": "5328beaf-8c19-4c90-b681-4fd8dd2a3fcb",
 			"title": "In Progress",
-			"tasks": []
+			"tasks": [
+				"361597ba-d7b7-4aa9-80de-260846524bb6"
+			]
 		},
 		{
 			"uuid": "d85997a6-18f5-492e-b32f-79140b4ae621",
@@ -177,15 +179,15 @@
 			"steps": [
 				{
 					"details": "Character 3D models",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Character animations",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Character spawning",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Character despawning",
@@ -276,6 +278,22 @@
 				},
 				{
 					"details": "Level restarting",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "2788996c-5560-4fc5-838a-14501f7f8d55",
+			"title": "Characters getting stuck on chains",
+			"description": "Characters can possibly never reach their destinations tue to obstacles or other characters. Need a way to detect of a character is stuck and try to give them a new target position or use a ray cast to find a new suitable direction to travel in. Maybe can also look into re-baking the navmesh when placing/removing chains.",
+			"category": "47d05e83-e571-4cdb-b6f9-35a3cebcddbb",
+			"steps": [
+				{
+					"details": "Detect if stuck",
+					"done": false
+				},
+				{
+					"details": "Try to reach target again",
 					"done": false
 				}
 			]

@@ -1,26 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://usl61yy6ba2f"]
+[gd_scene load_steps=10 format=3 uid="uid://usl61yy6ba2f"]
 
 [ext_resource type="Script" uid="uid://dgol7nvc5fcb4" path="res://camera-controller.gd" id="1_0411k"]
 [ext_resource type="Script" uid="uid://ly4j0cggcqd2" path="res://test-scene.gd" id="1_cp2na"]
 [ext_resource type="PackedScene" uid="uid://drb0x7bix0ur4" path="res://light-beacon.tscn" id="4_c5pbs"]
 [ext_resource type="PackedScene" uid="uid://i7s38eu2p7t7" path="res://power-source.tscn" id="4_cp2na"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8amj3"]
-sky_top_color = Color(0, 0, 0, 1)
-sky_horizon_color = Color(0, 0, 0, 1)
-ground_bottom_color = Color(0, 0, 0, 1)
-ground_horizon_color = Color(0, 0, 0, 1)
-energy_multiplier = 0.0
-
-[sub_resource type="Sky" id="Sky_c5pbs"]
-sky_material = SubResource("ProceduralSkyMaterial_8amj3")
-
 [sub_resource type="Environment" id="Environment_cp2na"]
-background_mode = 2
-sky = SubResource("Sky_c5pbs")
+background_mode = 1
+background_color = Color(0.222382, 0.222382, 0.222382, 1)
+background_energy_multiplier = 0.0
 tonemap_mode = 4
-ssao_enabled = true
-glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_c5pbs"]
+vertices = PackedVector3Array(-49.5, 0.5, -1.75, -3, 0.5, -1.75, -3, 0.5, -2.75, -2, 0.5, -3, -2, 0.5, -49.5, -49.5, 0.5, -49.5, -1, 0.5, -3, -0.5, 0.5, -2, 10.5, 0.5, -2, 11.25, 0.5, -3.25, 12.25, 0.5, -3.25, 12.25, 0.5, -49.5, 13.25, 0.5, -3, 13.25, 0.5, -2, 49.5, 0.5, -2, 49.5, 0.5, -49.5, 10.75, 0.5, -1.25, -1.25, 0.5, -0.75, -2, 0.5, 49.5, 12.25, 0.5, 49.5, 12.25, 0.5, -1, -2, 0.5, -0.75, 13, 0.5, -1, 49.5, 0.5, 49.5, -3, 0.5, -1, -49.5, 0.5, 49.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 4), PackedInt32Array(4, 2, 5), PackedInt32Array(5, 2, 0), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(11, 10, 9), PackedInt32Array(6, 3, 9), PackedInt32Array(9, 3, 4), PackedInt32Array(9, 4, 11), PackedInt32Array(14, 13, 12), PackedInt32Array(12, 10, 14), PackedInt32Array(14, 10, 11), PackedInt32Array(14, 11, 15), PackedInt32Array(7, 8, 16), PackedInt32Array(7, 16, 17), PackedInt32Array(17, 16, 20), PackedInt32Array(17, 20, 19), PackedInt32Array(17, 19, 18), PackedInt32Array(18, 21, 17), PackedInt32Array(13, 14, 22), PackedInt32Array(22, 14, 23), PackedInt32Array(22, 23, 19), PackedInt32Array(19, 20, 22), PackedInt32Array(0, 1, 24), PackedInt32Array(24, 21, 0), PackedInt32Array(0, 21, 18), PackedInt32Array(0, 18, 25)]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8amj3"]
 size = Vector3(100, 10, 100)
@@ -37,19 +30,6 @@ script = ExtResource("1_cp2na")
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_cp2na")
 
-[node name="Ground" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-collision_layer = 2
-
-[node name="GroundCollision" type="CollisionShape3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0)
-shape = SubResource("BoxShape3D_8amj3")
-
-[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_c5pbs")
-skeleton = NodePath("../..")
-
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("_camera", "_camera_ray_cast")]
 script = ExtResource("1_0411k")
 _camera = NodePath("Camera")
@@ -61,10 +41,30 @@ _camera_ray_cast = NodePath("CameraRayCast")
 target_position = Vector3(0, 0, -20)
 collision_mask = 2
 
-[node name="PowerSource" parent="." node_paths=PackedStringArray("_camera", "_camera_ray_cast") instance=ExtResource("4_cp2na")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)
-_camera = NodePath("../CameraController/Camera")
-_camera_ray_cast = NodePath("../CameraController/CameraRayCast")
+[node name="NavigationRegion" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_c5pbs")
 
-[node name="LightBeacon" parent="." instance=ExtResource("4_c5pbs")]
+[node name="Ground" type="StaticBody3D" parent="NavigationRegion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 2
+
+[node name="GroundCollision" type="CollisionShape3D" parent="NavigationRegion/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0)
+shape = SubResource("BoxShape3D_8amj3")
+
+[node name="GroundMesh" type="MeshInstance3D" parent="NavigationRegion/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("PlaneMesh_c5pbs")
+skeleton = NodePath("../../..")
+
+[node name="PowerSource" parent="NavigationRegion" node_paths=PackedStringArray("_camera", "_camera_ray_cast") instance=ExtResource("4_cp2na")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)
+_camera = NodePath("../../CameraController/Camera")
+_camera_ray_cast = NodePath("../../CameraController/CameraRayCast")
+
+[node name="LightBeacon" parent="NavigationRegion" instance=ExtResource("4_c5pbs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.5, -2.006)
+
+[node name="Far" type="Node3D" parent="NavigationRegion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.84835, 9.53674e-07, -7.81074)
+visible = false

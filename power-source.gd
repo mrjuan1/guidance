@@ -15,6 +15,7 @@ var _active: bool = false
 var _chain_placement_instance: ChainPlacement
 var _linked: bool = false
 var _chain: Chain
+var _navigation_region: NavigationRegion3D
 
 @onready var _faces_mesh: MeshInstance3D = $BoxFaces
 @onready var _faces_material: StandardMaterial3D = _faces_mesh.get_active_material(0) as StandardMaterial3D
@@ -28,6 +29,14 @@ var _chain: Chain
 @onready var _chain_link: PackedScene = preload("res://chain-link.tscn")
 @onready var _chain_pin: PackedScene = preload("res://chain-pin.tscn")
 
+func _ready() -> void:
+	var root: Node3D = get_parent_node_3d()
+	var parents_parent: Node3D = root.get_parent_node_3d()
+	while parents_parent:
+		root = parents_parent
+		parents_parent = parents_parent.get_parent_node_3d()
+	_navigation_region = root.find_child("NavigationRegion")
+
 func interact(interacting: bool) -> void:
 	if interacting and not GlobalStates.linking:
 		_active = !_active
@@ -37,12 +46,14 @@ func interact(interacting: bool) -> void:
 			_link_material.emission = _active_face_colour
 			_inactive_light.visible = false
 			_active_light.visible = true
+			_attract_characters()
 		else:
 			_faces_material.emission = _inactive_face_colour
 			_light_material.emission = _inactive_light_colour
 			_link_material.emission = _inactive_face_colour
 			_inactive_light.visible = true
 			_active_light.visible = false
+			_repel_characters()
 
 		if _chain:
 			for link: ChainLink in _chain.get_children():
@@ -110,12 +121,7 @@ func _place_chain(start: Vector3, end: Vector3, target: Node3D = null) -> void:
 
 		_chain.add_child(link_instance)
 
-	var root: Node3D = get_parent_node_3d()
-	var parents_parent: Node3D = root.get_parent_node_3d()
-	while parents_parent:
-		root = parents_parent
-		parents_parent = parents_parent.get_parent_node_3d()
-	root.add_child(_chain)
+	_navigation_region.add_child(_chain)
 
 	for link: ChainLink in _chain.get_children():
 		link.set_active(_active)
@@ -134,7 +140,7 @@ func _place_chain(start: Vector3, end: Vector3, target: Node3D = null) -> void:
 		chain_pin.camera = _camera
 		chain_pin.camera_ray_cast = _camera_ray_cast
 		chain_pin.input_chain = _chain
-		root.add_child(chain_pin)
+		_navigation_region.add_child(chain_pin)
 
 		_chain.destination = chain_pin
 		chain_pin.set_active(_active)
@@ -148,3 +154,21 @@ func unlink(_keep_source: bool = false) -> void:
 
 		_chain.queue_free()
 		_linked = false
+
+func _attract_characters() -> void:
+	Characters.target_position = position
+
+	if len(Characters.characters) == 0:
+		Characters.add_characters()
+		for character: Character in Characters.characters:
+			_navigation_region.add_child(character)
+	else:
+		for character: Character in Characters.characters:
+			character.move()
+
+func _repel_characters() -> void:
+	var far: Node3D = _navigation_region.find_child("Far")
+	Characters.target_position = far.position
+
+	for character: Character in Characters.characters:
+		character.move()

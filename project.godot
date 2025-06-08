@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalStates="*res://global-states.gd"
+Characters="*res://characters.gd"
 
 [debug]
 
