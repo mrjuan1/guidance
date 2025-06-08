@@ -180,6 +180,11 @@ func unlink(_keep_source: bool = false) -> void:
 		_chain.queue_free()
 		_linked = false
 
+	if _active:
+		_attract_characters()
+	else:
+		_repel_characters()
+
 func _attract_characters() -> void:
 	Characters.target_position = position
 

@@ -185,6 +185,24 @@ func unlink(keep_source: bool = false) -> void:
 				_chain2.destination.call("unlink")
 		_chain2.queue_free()
 
+	if input_chain:
+		var input: Node3D = input_chain.source
+		while input:
+			if input.get("source"):
+				var next_input: Node3D = input.get("source")
+				if next_input:
+					input = next_input
+				else:
+					break
+			else:
+				break
+		if input:
+			Characters.target_position = input.position
+		else:
+			Characters.target_position = position
+		for character: Character in Characters.characters:
+			character.move()
+
 	if not keep_source:
 		if input_chain and input_chain.source:
 			input_chain.destination = null
@@ -192,4 +210,6 @@ func unlink(keep_source: bool = false) -> void:
 				input_chain.source.call("unlink")
 			input_chain.queue_free()
 
+		queue_free()
+	elif not input_chain:
 		queue_free()

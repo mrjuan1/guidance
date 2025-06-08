@@ -56,19 +56,20 @@ func _attract_characters() -> void:
 		character.move()
 
 func _repel_characters() -> void:
-	var root: Node3D = get_parent_node_3d()
-	var parent: Node3D = root.get_parent_node_3d()
-	while parent:
-		root = parent
-		parent = parent.get_parent_node_3d()
-	var navigation_region: NavigationRegion3D = root.find_child("NavigationRegion")
-
-	var power_source: Node3D = navigation_region.find_child("PowerSource")
-	if power_source.get("_active"):
-		Characters.target_position = power_source.position
-	else:
-		var far: Node3D = navigation_region.find_child("Far")
-		Characters.target_position = far.position
-
-	for character: Character in Characters.characters:
-		character.move()
+	pass
+	#var root: Node3D = get_parent_node_3d()
+	#var parent: Node3D = root.get_parent_node_3d()
+	#while parent:
+		#root = parent
+		#parent = parent.get_parent_node_3d()
+	#var navigation_region: NavigationRegion3D = root.find_child("NavigationRegion")
+#
+	#var power_source: Node3D = navigation_region.find_child("PowerSource")
+	#if power_source.get("_active"):
+		#Characters.target_position = power_source.position
+	#else:
+		#var far: Node3D = navigation_region.find_child("Far")
+		#Characters.target_position = far.position
+#
+	#for character: Character in Characters.characters:
+		#character.move()
