@@ -1,8 +1,8 @@
 class_name LightBeacon
 extends StaticBody3D
 
-@onready var _inactive_face_colour: Color = Color(0.26, 0.108, 0.0)
-@onready var _active_face_colour: Color = Color(1.0, 0.9, 0.0)
+@export var _inactive_face_colour: Color = Color(0.26, 0.108, 0.0)
+@export var _active_face_colour: Color = Color(1.0, 0.9, 0.0)
 
 var _active: bool = false
 var input_chain: Chain

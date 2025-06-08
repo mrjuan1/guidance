@@ -43,7 +43,7 @@ func interact(interacting: bool) -> void:
 	elif not interacting:
 		unlink(true)
 
-func set_active(active) -> void:
+func set_active(active: bool) -> void:
 	_active = active
 	if _active:
 		_material.emission = _active_colour
@@ -78,7 +78,8 @@ func _on_chain_placed(
 			if actual_target is LightBeacon:
 				actual_target = actual_target.find_child("ChainLink")
 			elif actual_target is LongBox:
-				if not actual_target.input_chain1:
+				var long_box: LongBox = actual_target
+				if not long_box.input_chain1:
 					actual_target = actual_target.find_child("LongBoxChainLinkIn1")
 				else:
 					actual_target = actual_target.find_child("LongBoxChainLinkIn2")
@@ -180,7 +181,7 @@ func unlink(keep_source: bool = false) -> void:
 	if _chain2:
 		if _chain2.destination:
 			_chain2.source = null
-			if _chain2.destination.has_method("unlink"):
+			if not _chain1 and _chain2.destination.has_method("unlink"):
 				_chain2.destination.call("unlink")
 		_chain2.queue_free()
 

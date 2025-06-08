@@ -3,10 +3,10 @@ extends StaticBody3D
 @export var _camera: Camera3D
 @export var _camera_ray_cast: RayCast3D
 
-@onready var _inactive_face_colour: Color = Color(1.0, 0.417, 0.0)
-@onready var _active_face_colour: Color = Color(1.0, 0.9, 0.0)
-@onready var _inactive_light_colour: Color = Color(1.0, 0.0, 0.0)
-@onready var _active_light_colour: Color = Color(0.0, 1.0, 0.0)
+@export var _inactive_face_colour: Color = Color(1.0, 0.417, 0.0)
+@export var _active_face_colour: Color = Color(1.0, 0.9, 0.0)
+@export var _inactive_light_colour: Color = Color(1.0, 0.0, 0.0)
+@export var _active_light_colour: Color = Color(0.0, 1.0, 0.0)
 
 const _HALF_PI = PI / 2.0
 const _QUARTER_PI = _HALF_PI / 2.0

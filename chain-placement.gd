@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 		if camera_ray_cast.is_colliding():
 			var collision_position: Vector3 = camera_ray_cast.get_collision_point()
 			var collider: Object = camera_ray_cast.get_collider()
-			var is_pin = collider is not LightBeacon and \
+			var is_pin: bool = collider is not LightBeacon and \
 				collider is not LightBeaconIn and \
 				collider is not LongBox and \
 				collider is not LongBoxIn
@@ -46,7 +46,7 @@ func _input(event: InputEvent) -> void:
 		if event.is_action("interact") and _input_relative.is_zero_approx():
 			var collision_position: Vector3 = camera_ray_cast.get_collision_point()
 			var collider: Object = camera_ray_cast.get_collider()
-			var is_pin = collider is not LightBeacon and \
+			var is_pin: bool = collider is not LightBeacon and \
 				collider is not LightBeaconIn and \
 				collider is not LongBox and \
 				collider is not LongBoxIn
