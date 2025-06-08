@@ -74,3 +74,44 @@ _camera_ray_cast = NodePath("../../CameraController/CameraRayCast")
 [node name="Far" type="Node3D" parent="NavigationRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.84835, 9.53674e-07, -7.81074)
 visible = false
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 10.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ControlsLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = -2.0
+offset_right = 463.0
+offset_bottom = 255.0
+text = "Controls:
+Left-click on power source to activate
+Left-click on links to start placing chains
+Left-click anywhere or on other links to finish placing chains
+Chain \"pins\" can have two outgoing chains
+
+Right-click to remove links or cancel chain placement
+Left-click drag to pan camera
+Right-click-drag to rotate camera
+Scroll to zoom camera
+Middle-click to reset camera rotation and zoom
+
+Escape to quit"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+text = "The idea was to guide the little guys to an exit, but didn't have enough time to implement everything
+Will complete project outside of the game jam (this message will be removed after the jam too)"
