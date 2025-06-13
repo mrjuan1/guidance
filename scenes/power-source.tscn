@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7uv5xvexud7m"]
+
+[ext_resource type="PackedScene" uid="uid://b2t817enqvr0w" path="res://scenes/box.tscn" id="1_2dofe"]
+[ext_resource type="Script" uid="uid://dwamqmmcu15eu" path="res://scripts/power-source.gd" id="1_v6m8q"]
+[ext_resource type="PackedScene" uid="uid://dflvbv46kp4t5" path="res://models/box-parts/box-light.gltf" id="2_yt4jl"]
+[ext_resource type="PackedScene" uid="uid://bvkdxtdxrnnjo" path="res://scenes/chain-link-static.tscn" id="3_yt4jl"]
+[ext_resource type="Script" uid="uid://bfi33aacaac75" path="res://scripts/box-light.gd" id="4_k0sv5"]
+[ext_resource type="Script" uid="uid://bkaahab6lvd6i" path="res://scripts/power-source-light.gd" id="6_kd56b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2dofe"]
+
+[node name="PowerSource" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_v6m8q")
+
+[node name="Box" parent="." instance=ExtResource("1_2dofe")]
+
+[node name="BoxLight" parent="." instance=ExtResource("2_yt4jl")]
+script = ExtResource("4_k0sv5")
+
+[node name="ChainLinkStatic" parent="." instance=ExtResource("3_yt4jl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57, 0.5, 0)
+
+[node name="PowerSourceCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_2dofe")
+
+[node name="PowerSourceLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+light_color = Color(0.498, 0.231, 0, 1)
+light_bake_mode = 0
+shadow_enabled = true
+shadow_opacity = 0.0
+omni_range = 1.5
+omni_attenuation = 2.0
+script = ExtResource("6_kd56b")

@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://vuo4l008yd64"]
+
+[ext_resource type="PackedScene" uid="uid://decxmw2xnv8ul" path="res://models/chain-link.gltf" id="1_bvqy8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_22wee"]
+height = 0.22
+radius = 0.05
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_eb4j7"]
+height = 0.19
+radius = 0.043
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cx75h"]
+height = 0.15
+radius = 0.043
+
+[node name="ChainLinkRigid" type="RigidBody3D"]
+input_ray_pickable = false
+
+[node name="ChainLink" parent="." instance=ExtResource("1_bvqy8")]
+
+[node name="ChainLinkCollision1" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, -0.12)
+shape = SubResource("CylinderShape3D_22wee")
+
+[node name="ChainLinkCollision2" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0.12)
+shape = SubResource("CylinderShape3D_22wee")
+
+[node name="ChainLinkCollision3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.197, 0, 0)
+shape = SubResource("CylinderShape3D_eb4j7")
+
+[node name="ChainLinkCollision4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.197, 0, 0)
+shape = SubResource("CylinderShape3D_eb4j7")
+
+[node name="ChainLinkCollision5" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, -0.866025, 3.78552e-08, 0, -4.37114e-08, -1, 0.866025, 0.5, -2.18557e-08, -0.154, 0, -0.095)
+shape = SubResource("CylinderShape3D_cx75h")
+
+[node name="ChainLinkCollision6" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0.866025, -3.78552e-08, 0, -4.37114e-08, -1, -0.866025, 0.5, -2.18557e-08, 0.154, 0, -0.095)
+shape = SubResource("CylinderShape3D_cx75h")
+
+[node name="ChainLinkCollision7" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0.866025, -3.78552e-08, 0, -4.37114e-08, -1, -0.866025, 0.5, -2.18557e-08, -0.154, 0, 0.095)
+shape = SubResource("CylinderShape3D_cx75h")
+
+[node name="ChainLinkCollision8" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, -0.866025, 3.78552e-08, 0, -4.37114e-08, -1, 0.866025, 0.5, -2.18557e-08, 0.154, 0, 0.095)
+shape = SubResource("CylinderShape3D_cx75h")

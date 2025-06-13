@@ -1,117 +1,42 @@
-[gd_scene load_steps=11 format=3 uid="uid://usl61yy6ba2f"]
+[gd_scene load_steps=8 format=3 uid="uid://77g3x2qihytk"]
 
-[ext_resource type="Script" uid="uid://dgol7nvc5fcb4" path="res://camera-controller.gd" id="1_0411k"]
-[ext_resource type="Script" uid="uid://ly4j0cggcqd2" path="res://test-scene.gd" id="1_cp2na"]
-[ext_resource type="PackedScene" uid="uid://drb0x7bix0ur4" path="res://light-beacon.tscn" id="4_c5pbs"]
-[ext_resource type="PackedScene" uid="uid://i7s38eu2p7t7" path="res://power-source.tscn" id="4_cp2na"]
-[ext_resource type="PackedScene" uid="uid://b5jvmxrm46llo" path="res://long-box.tscn" id="5_cp2na"]
+[ext_resource type="Environment" uid="uid://67al5m2rq0f2" path="res://resources/environment.tres" id="1_8amj3"]
+[ext_resource type="PackedScene" uid="uid://c7uv5xvexud7m" path="res://scenes/power-source.tscn" id="1_0411k"]
+[ext_resource type="PackedScene" uid="uid://dcq65tml3tgr6" path="res://scenes/camera-controller.tscn" id="2_wn8ut"]
 
-[sub_resource type="Environment" id="Environment_cp2na"]
-background_mode = 1
-background_color = Color(0.222382, 0.222382, 0.222382, 1)
-background_energy_multiplier = 0.0
-tonemap_mode = 4
+[sub_resource type="NavigationMesh" id="NavigationMesh_wn8ut"]
+vertices = PackedVector3Array(-49.5, 0.5, -1.75, -4, 0.5, -1.75, -4, 0.5, -2.75, -2.75, 0.5, -3, -2.75, 0.5, -49.5, -49.5, 0.5, -49.5, -2, 0.5, -3, -1.5, 0.5, -2, 49.5, 0.5, -2, 49.5, 0.5, -49.5, -2.25, 0.5, -0.75, -3, 0.5, -0.75, -3, 0.5, 49.5, 49.5, 0.5, 49.5, -4, 0.5, -1, -49.5, 0.5, 49.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(4, 0, 5), PackedInt32Array(6, 3, 4), PackedInt32Array(6, 4, 7), PackedInt32Array(7, 4, 8), PackedInt32Array(8, 4, 9), PackedInt32Array(12, 11, 10), PackedInt32Array(10, 7, 12), PackedInt32Array(12, 7, 8), PackedInt32Array(12, 8, 13), PackedInt32Array(0, 1, 14), PackedInt32Array(14, 11, 0), PackedInt32Array(0, 11, 12), PackedInt32Array(0, 12, 15)]
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_c5pbs"]
-vertices = PackedVector3Array(-49.5, 0.5, -1.75, -3, 0.5, -1.75, -3, 0.5, -2.75, -2, 0.5, -3, -2, 0.5, -49.5, -49.5, 0.5, -49.5, -1, 0.5, -3, -0.5, 0.5, -2, 10.5, 0.5, -2, 11.25, 0.5, -3.25, 12.25, 0.5, -3.25, 12.25, 0.5, -49.5, 13, 0.5, -3.25, 13.25, 0.5, -2.25, 49.5, 0.5, -2.25, 49.5, 0.5, -49.5, 12, 0.5, -1, 11.75, 0.5, 6.25, 12.75, 0.5, 6.25, 13, 0.5, -1, 13.25, 0.5, 7.75, 49.5, 0.5, 7.75, 10.75, 0.5, -1.25, 10.5, 0.5, 6.75, -1.25, 0.5, -0.75, 12, 0.5, 49.5, 10.5, 0.5, 8.5, -2.75, 0.5, -0.75, -49.5, 0.5, 49.5, 12, 0.5, 9, 13, 0.5, 8.75, 49.5, 0.5, 49.5)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 4), PackedInt32Array(4, 2, 5), PackedInt32Array(5, 2, 0), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(11, 10, 9), PackedInt32Array(6, 3, 9), PackedInt32Array(9, 3, 4), PackedInt32Array(9, 4, 11), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(15, 12, 11), PackedInt32Array(12, 10, 11), PackedInt32Array(19, 18, 16), PackedInt32Array(16, 18, 17), PackedInt32Array(19, 13, 18), PackedInt32Array(18, 13, 20), PackedInt32Array(20, 13, 14), PackedInt32Array(20, 14, 21), PackedInt32Array(22, 16, 17), PackedInt32Array(22, 17, 8), PackedInt32Array(8, 17, 23), PackedInt32Array(8, 23, 7), PackedInt32Array(7, 23, 24), PackedInt32Array(26, 25, 27), PackedInt32Array(27, 25, 0), PackedInt32Array(0, 25, 28), PackedInt32Array(26, 29, 25), PackedInt32Array(0, 1, 27), PackedInt32Array(23, 26, 24), PackedInt32Array(24, 26, 27), PackedInt32Array(30, 20, 21), PackedInt32Array(30, 21, 29), PackedInt32Array(29, 21, 25), PackedInt32Array(25, 21, 31)]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0411k"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8amj3"]
-size = Vector3(100, 10, 100)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8amj3"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_c5pbs"]
-material = SubResource("StandardMaterial3D_8amj3")
+[sub_resource type="PlaneMesh" id="PlaneMesh_0411k"]
+material = SubResource("StandardMaterial3D_0411k")
 size = Vector2(100, 100)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_wn8ut"]
+size = Vector3(100, 10, 100)
+
 [node name="TestScene" type="Node3D"]
-script = ExtResource("1_cp2na")
 
 [node name="Environment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_cp2na")
+environment = ExtResource("1_8amj3")
 
-[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("_camera", "_camera_ray_cast")]
-script = ExtResource("1_0411k")
-_camera = NodePath("Camera")
-_camera_ray_cast = NodePath("CameraRayCast")
-
-[node name="Camera" type="Camera3D" parent="CameraController"]
-
-[node name="CameraRayCast" type="RayCast3D" parent="CameraController"]
-target_position = Vector3(0, 0, -20)
-collision_mask = 2
+[node name="CameraController" parent="." instance=ExtResource("2_wn8ut")]
 
 [node name="NavigationRegion" type="NavigationRegion3D" parent="."]
-navigation_mesh = SubResource("NavigationMesh_c5pbs")
+navigation_mesh = SubResource("NavigationMesh_wn8ut")
 
 [node name="Ground" type="StaticBody3D" parent="NavigationRegion"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-collision_layer = 2
-
-[node name="GroundCollision" type="CollisionShape3D" parent="NavigationRegion/Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0)
-shape = SubResource("BoxShape3D_8amj3")
 
 [node name="GroundMesh" type="MeshInstance3D" parent="NavigationRegion/Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_c5pbs")
-skeleton = NodePath("../../..")
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("PlaneMesh_0411k")
 
-[node name="PowerSource" parent="NavigationRegion" node_paths=PackedStringArray("_camera", "_camera_ray_cast") instance=ExtResource("4_cp2na")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)
-_camera = NodePath("../../CameraController/Camera")
-_camera_ray_cast = NodePath("../../CameraController/CameraRayCast")
+[node name="GroundCollision" type="CollisionShape3D" parent="NavigationRegion/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+shape = SubResource("BoxShape3D_wn8ut")
 
-[node name="LightBeacon" parent="NavigationRegion" instance=ExtResource("4_c5pbs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.5, -2.006)
-
-[node name="LongBox" parent="NavigationRegion" node_paths=PackedStringArray("_camera", "_camera_ray_cast") instance=ExtResource("5_cp2na")]
-transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -1, 11.9488, 0.5, 7.62634)
-_camera = NodePath("../../CameraController/Camera")
-_camera_ray_cast = NodePath("../../CameraController/CameraRayCast")
-
-[node name="Far" type="Node3D" parent="NavigationRegion"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.84835, 9.53674e-07, -7.81074)
-visible = false
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchor_right = 10.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ControlsLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_top = -2.0
-offset_right = 463.0
-offset_bottom = 255.0
-text = "Controls:
-Left-click on power source to activate
-Left-click on links to start placing chains
-Left-click anywhere or on other links to finish placing chains
-Chain \"pins\" can have two outgoing chains
-
-Right-click to remove links or cancel chain placement
-Left-click drag to pan camera
-Right-click-drag to rotate camera
-Scroll to zoom camera
-Middle-click to reset camera rotation and zoom
-
-Escape to quit"
-
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 40.0
-grow_vertical = 0
-text = "The idea was to guide the little guys to an exit, but didn't have enough time to implement everything
-Will complete project outside of the game jam (this message will be removed after the jam too)"
+[node name="PowerSource" parent="NavigationRegion" instance=ExtResource("1_0411k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)

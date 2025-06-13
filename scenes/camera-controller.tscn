@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcq65tml3tgr6"]
+
+[ext_resource type="Script" uid="uid://db7cmrl0207rs" path="res://scripts/camera-controller.gd" id="1_ps5h4"]
+
+[node name="CameraController" type="Node3D"]
+transform = Transform3D(0.939693, -0.296198, 0.17101, 0, 0.5, 0.866025, -0.34202, -0.813798, 0.469846, 0, 0, 0)
+script = ExtResource("1_ps5h4")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="CameraRayCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -20)
+collision_mask = 3

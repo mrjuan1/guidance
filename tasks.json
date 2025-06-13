@@ -1,331 +1,245 @@
 {
 	"categories": [
 		{
-			"uuid": "901568a6-2f5e-485f-b4a1-5fe57824f745",
+			"uuid": "003677f8-3dd1-47d9-a7b0-9747c51d506a",
 			"title": "Task",
 			"color": "ca9ee6"
 		},
 		{
-			"uuid": "795631ba-e1cb-45f8-ac92-4b284917d33a",
+			"uuid": "724bc5b0-9e59-4cfd-bf3f-32b6b2667d41",
 			"title": "Feature",
-			"color": "009bd8"
+			"color": "3a9ee6"
 		},
 		{
-			"uuid": "47d05e83-e571-4cdb-b6f9-35a3cebcddbb",
+			"uuid": "2a65ca9b-92e1-4339-8c39-e6cd25a69147",
 			"title": "Bug",
-			"color": "d31a68"
+			"color": "ca4264"
 		}
 	],
 	"stages": [
 		{
-			"uuid": "e9b6ce0a-dde5-4adb-bd7f-c076329b5f11",
+			"uuid": "1e4b6bbc-aa02-4b5f-9211-fb11bf7ffc9c",
 			"title": "Todo",
 			"tasks": [
-				"2217c11c-4f96-4d24-ae78-546169bcca8a",
-				"45d13c06-33be-4753-81a9-0913be9d07dd"
+				"c85b6442-60b2-4cde-b8a6-948e1b764fe7",
+				"a6030f99-7495-49f1-8ab5-82caa38c67cc",
+				"4347d88f-e11f-4646-a2d9-8aef7f12eb08",
+				"69d48a1e-b26c-4734-bd79-9a984a836897",
+				"90b50e3b-041f-426b-9c79-ecd81c827ec9",
+				"aad9a757-9a20-48a7-b3bc-48e805431a11",
+				"2c808bc1-2407-4445-b7e1-9d5e0070f45e",
+				"45815069-6aa5-4ee7-ba89-643708c39268",
+				"78dee35e-decf-4617-ab26-bbd49da93c0f"
 			]
 		},
 		{
-			"uuid": "5328beaf-8c19-4c90-b681-4fd8dd2a3fcb",
+			"uuid": "c70b767e-9763-4ba0-9c4a-d612d53effb5",
 			"title": "In Progress",
 			"tasks": [
-				"fb81165c-aec5-4185-a74d-92b2157884ed",
-				"361597ba-d7b7-4aa9-80de-260846524bb6"
+				"618fbffa-2e31-4520-a0f6-10ffa65ab5bd",
+				"68f0c6bf-d255-47c3-bc25-3d5d32dd892a"
 			]
 		},
 		{
-			"uuid": "d85997a6-18f5-492e-b32f-79140b4ae621",
+			"uuid": "1f9c8ac2-39e7-4b59-ad37-d75131f1913c",
 			"title": "Done",
 			"tasks": [
-				"f6e53c2b-785e-4714-bea1-20ad0fdaf011",
-				"3212650f-dd62-459e-a715-a87fc4d4da2f",
-				"30e3fb79-9205-48e3-8305-49b58d9ce836",
-				"73c7248f-0961-45e3-af73-a98d5f6c2880",
-				"3d014ec7-d84a-43c5-b4b3-338291fa6228",
-				"c316ffd7-8a4a-4b24-aad3-ade6d35b6fe8",
-				"3709d590-abd0-476b-8d2f-ec1b53877e41"
-			]
-		},
-		{
-			"uuid": "8c39f3ac-ab85-46db-87f8-c9202cdb03a0",
-			"title": "On Hold",
-			"tasks": [
-				"2788996c-5560-4fc5-838a-14501f7f8d55"
+				"26efff71-0a3f-468b-96ea-e0daf8a936a8",
+				"7235df45-747f-4d22-8112-4fa7b55782a7"
 			]
 		}
 	],
 	"tasks": [
 		{
-			"uuid": "73c7248f-0961-45e3-af73-a98d5f6c2880",
-			"title": "Power source",
-			"description": "3D model can be a box with a border and a light on top. Light will be red when off and green when on. The box sides will be grey when off and an orangish-yellow when on. It will also produce light when on.",
-			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
-			"steps": [
-				{
-					"details": "Sample scene",
-					"done": true
-				},
-				{
-					"details": "On/off states",
-					"done": true
-				},
-				{
-					"details": "Toggling",
-					"done": true
-				},
-				{
-					"details": "3D model",
-					"done": true
-				},
-				{
-					"details": "Lighting",
-					"done": true
-				},
-				{
-					"details": "Interactive link",
-					"done": true
-				}
-			]
-		},
-		{
-			"uuid": "30e3fb79-9205-48e3-8305-49b58d9ce836",
-			"title": "Chain placement",
-			"description": "Player can place chains from an object with a link to any other link. Chains can also be pinned on the ground to change their direction while placing. Clicking a link should activate chain placement. In this mode, a transparent (blue?) set of links will appear from the link to where the cursor is pointing on the ground. If it intersects anything, the colour will change (red?). Once placed, physics will be enabled for the chain links. They will also check the state of the source and destination links and transmit the source state to the destination state.",
-			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
-			"steps": [
-				{
-					"details": "3D model",
-					"done": true
-				},
-				{
-					"details": "Custom collision",
-					"done": true
-				},
-				{
-					"details": "Valid spawning",
-					"done": true
-				},
-				{
-					"details": "Automatic link creation",
-					"done": true
-				},
-				{
-					"details": "Obstacle detection",
-					"done": true
-				},
-				{
-					"details": "Placement detection and action",
-					"done": true
-				},
-				{
-					"details": "State detection",
-					"done": true
-				}
-			]
-		},
-		{
-			"uuid": "3d014ec7-d84a-43c5-b4b3-338291fa6228",
-			"title": "Light beacon",
-			"description": "Inherits the state of whatever's connected to it",
-			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
-			"steps": []
-		},
-		{
-			"uuid": "f6e53c2b-785e-4714-bea1-20ad0fdaf011",
-			"title": "Camera controls",
-			"description": "Camera panning with left click drag\nCamera rotation with right click drag\nCamera zoom with mouse wheel\nMiddle click to reset camera rotation and zoom",
-			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
-			"steps": [
-				{
-					"details": "Sample scene",
-					"done": true
-				},
-				{
-					"details": "Camera panning",
-					"done": true
-				},
-				{
-					"details": "Camera rotation",
-					"done": true
-				},
-				{
-					"details": "Camera zooming",
-					"done": true
-				},
-				{
-					"details": "Camera reset",
-					"done": true
-				}
-			]
-		},
-		{
-			"uuid": "3212650f-dd62-459e-a715-a87fc4d4da2f",
-			"title": "Object selection",
-			"description": "Should be able to click on an object and fire a signal from the camera controller with which object was clicked on.",
-			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
-			"steps": [
-				{
-					"details": "Add object selection",
-					"done": true
-				},
-				{
-					"details": "Create signal for object selection",
-					"done": true
-				},
-				{
-					"details": "Listen on signal and print selected object",
-					"done": true
-				}
-			]
-		},
-		{
-			"uuid": "361597ba-d7b7-4aa9-80de-260846524bb6",
-			"title": "Characters",
-			"description": "A random range of characters should spawn around a power point when it's activated and move toward it. If it's deactivated, the characters should move away from it and despawn once far enough. Characters will automatically move to any linked light beacons if active. Unlinking a light beacon will cause the characters to run back to the last active node in the link (likely the power source).",
-			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
-			"steps": [
-				{
-					"details": "Character 3D models",
-					"done": true
-				},
-				{
-					"details": "Character animations",
-					"done": true
-				},
-				{
-					"details": "Character spawning",
-					"done": true
-				},
-				{
-					"details": "Character movement to light beacon",
-					"done": true
-				},
-				{
-					"details": "Character despawning",
-					"done": false
-				}
-			]
-		},
-		{
-			"uuid": "45d13c06-33be-4753-81a9-0913be9d07dd",
-			"title": "Removing chain pins",
-			"description": "Removing a chain pin should remove itself and the chain linked to it. At the moment, it stays and removes the chain going out from it.",
-			"category": "47d05e83-e571-4cdb-b6f9-35a3cebcddbb",
-			"steps": []
-		},
-		{
-			"uuid": "c316ffd7-8a4a-4b24-aad3-ade6d35b6fe8",
-			"title": "Override node",
-			"description": "This node has two input links and one output link. The node is active until both input links are powered. This will cause an override and disable this node. One link will cause characters to move to the node, as it'll still be active. A second link will deactivate it, causing the characters to move back to the last active node in the link.",
-			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
-			"steps": [
-				{
-					"details": "3D model",
-					"done": true
-				},
-				{
-					"details": "Input links",
-					"done": true
-				},
-				{
-					"details": "Output link",
-					"done": true
-				},
-				{
-					"details": "State updating",
-					"done": true
-				}
-			]
-		},
-		{
-			"uuid": "fb81165c-aec5-4185-a74d-92b2157884ed",
-			"title": "Black fog",
-			"description": "Black fog travels along active lines and can kill characters. It will always try to travel to the last active node in the link. If it kills any characters, the level will return to the last safe state.",
-			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
-			"steps": [
-				{
-					"details": "Black fog (particles?)",
-					"done": false
-				},
-				{
-					"details": "Animation",
-					"done": false
-				},
-				{
-					"details": "Movement",
-					"done": false
-				},
-				{
-					"details": "Attacking characters",
-					"done": false
-				},
-				{
-					"details": "Reloading last state",
-					"done": false
-				}
-			]
-		},
-		{
-			"uuid": "2217c11c-4f96-4d24-ae78-546169bcca8a",
-			"title": "State tracking and saving",
-			"description": "Keep track of the player's actions and store a state for each one. Allow reverting to any previous state. Doing this will destroy all states that follow the one being restored. Each state change updates a file soring all the states. Levels can be restarted by removing all states (?).",
-			"category": "795631ba-e1cb-45f8-ac92-4b284917d33a",
-			"steps": [
-				{
-					"details": "Store level and setup new state for it",
-					"done": false
-				},
-				{
-					"details": "Store state on placing or removing nodes and links",
-					"done": false
-				},
-				{
-					"details": "Restore state by \"playing back\" states up to specified index",
-					"done": false
-				},
-				{
-					"details": "Level restarting",
-					"done": false
-				}
-			]
-		},
-		{
-			"uuid": "2788996c-5560-4fc5-838a-14501f7f8d55",
-			"title": "Characters getting stuck on chains",
-			"description": "Characters can possibly never reach their destinations tue to obstacles or other characters. Need a way to detect of a character is stuck and try to give them a new target position or use a ray cast to find a new suitable direction to travel in. Maybe can also look into re-baking the navmesh when placing/removing chains.",
-			"category": "47d05e83-e571-4cdb-b6f9-35a3cebcddbb",
-			"steps": [
-				{
-					"details": "Detect if stuck",
-					"done": false
-				},
-				{
-					"details": "Try to reach target again",
-					"done": false
-				}
-			]
-		},
-		{
-			"uuid": "3709d590-abd0-476b-8d2f-ec1b53877e41",
-			"title": "Characters not moving to right node",
+			"uuid": "26efff71-0a3f-468b-96ea-e0daf8a936a8",
+			"title": "Camera and scene-clicking",
 			"description": "",
-			"category": "47d05e83-e571-4cdb-b6f9-35a3cebcddbb",
+			"category": "003677f8-3dd1-47d9-a7b0-9747c51d506a",
+			"steps": [
+				{
+					"details": "Camera setup",
+					"done": true
+				},
+				{
+					"details": "Camera control",
+					"done": true
+				},
+				{
+					"details": "Scene interaction",
+					"done": true
+				}
+			]
+		},
+		{
+			"uuid": "7235df45-747f-4d22-8112-4fa7b55782a7",
+			"title": "Power source and chain link interaction handling",
+			"description": "",
+			"category": "003677f8-3dd1-47d9-a7b0-9747c51d506a",
+			"steps": []
+		},
+		{
+			"uuid": "618fbffa-2e31-4520-a0f6-10ffa65ab5bd",
+			"title": "Chain placement, chain pins and light beacon",
+			"description": "",
+			"category": "003677f8-3dd1-47d9-a7b0-9747c51d506a",
+			"steps": [
+				{
+					"details": "Placement preview",
+					"done": false
+				},
+				{
+					"details": "Intersection detection and preview",
+					"done": false
+				},
+				{
+					"details": "Trigger actual placement",
+					"done": false
+				},
+				{
+					"details": "Chain pins",
+					"done": false
+				},
+				{
+					"details": "Light beacon",
+					"done": false
+				},
+				{
+					"details": "Placement removal/unlinking",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "a6030f99-7495-49f1-8ab5-82caa38c67cc",
+			"title": "State transfer logic",
+			"description": "",
+			"category": "003677f8-3dd1-47d9-a7b0-9747c51d506a",
+			"steps": []
+		},
+		{
+			"uuid": "4347d88f-e11f-4646-a2d9-8aef7f12eb08",
+			"title": "Override node",
+			"description": "",
+			"category": "003677f8-3dd1-47d9-a7b0-9747c51d506a",
+			"steps": []
+		},
+		{
+			"uuid": "69d48a1e-b26c-4734-bd79-9a984a836897",
+			"title": "Black fog",
+			"description": "",
+			"category": "724bc5b0-9e59-4cfd-bf3f-32b6b2667d41",
+			"steps": []
+		},
+		{
+			"uuid": "90b50e3b-041f-426b-9c79-ecd81c827ec9",
+			"title": "Exit",
+			"description": "",
+			"category": "724bc5b0-9e59-4cfd-bf3f-32b6b2667d41",
+			"steps": []
+		},
+		{
+			"uuid": "aad9a757-9a20-48a7-b3bc-48e805431a11",
+			"title": "Level node",
+			"description": "",
+			"category": "724bc5b0-9e59-4cfd-bf3f-32b6b2667d41",
+			"steps": []
+		},
+		{
+			"uuid": "c85b6442-60b2-4cde-b8a6-948e1b764fe7",
+			"title": "Characters",
+			"description": "",
+			"category": "003677f8-3dd1-47d9-a7b0-9747c51d506a",
+			"steps": [
+				{
+					"details": "Spawning",
+					"done": false
+				},
+				{
+					"details": "Haning around target node",
+					"done": false
+				},
+				{
+					"details": "Scattering",
+					"done": false
+				},
+				{
+					"details": "Following active nodes",
+					"done": false
+				},
+				{
+					"details": "Dying",
+					"done": false
+				},
+				{
+					"details": "Reacting to black fog (later)",
+					"done": false
+				},
+				{
+					"details": "Click interaction (later)",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "45815069-6aa5-4ee7-ba89-643708c39268",
+			"title": "More ideas for game mechanics (nodes, threats, etc.)",
+			"description": "",
+			"category": "003677f8-3dd1-47d9-a7b0-9747c51d506a",
+			"steps": []
+		},
+		{
+			"uuid": "78dee35e-decf-4617-ab26-bbd49da93c0f",
+			"title": "More level ideas",
+			"description": "",
+			"category": "003677f8-3dd1-47d9-a7b0-9747c51d506a",
+			"steps": []
+		},
+		{
+			"uuid": "68f0c6bf-d255-47c3-bc25-3d5d32dd892a",
+			"title": "Interaction tracking and undo/restart",
+			"description": "",
+			"category": "724bc5b0-9e59-4cfd-bf3f-32b6b2667d41",
+			"steps": [
+				{
+					"details": "Interaction tracking",
+					"done": false
+				},
+				{
+					"details": "Undo",
+					"done": false
+				},
+				{
+					"details": "Restart",
+					"done": false
+				},
+				{
+					"details": "Saving",
+					"done": false
+				},
+				{
+					"details": "Loading",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "2c808bc1-2407-4445-b7e1-9d5e0070f45e",
+			"title": "Intro and tutorial",
+			"description": "",
+			"category": "724bc5b0-9e59-4cfd-bf3f-32b6b2667d41",
 			"steps": []
 		}
 	],
 	"layout": {
 		"columns": [
 			[
-				"e9b6ce0a-dde5-4adb-bd7f-c076329b5f11"
+				"1e4b6bbc-aa02-4b5f-9211-fb11bf7ffc9c"
 			],
 			[
-				"5328beaf-8c19-4c90-b681-4fd8dd2a3fcb"
+				"c70b767e-9763-4ba0-9c4a-d612d53effb5"
 			],
 			[
-				"d85997a6-18f5-492e-b32f-79140b4ae621"
-			],
-			[
-				"8c39f3ac-ab85-46db-87f8-c9202cdb03a0"
+				"1f9c8ac2-39e7-4b59-ad37-d75131f1913c"
 			]
 		]
 	}
