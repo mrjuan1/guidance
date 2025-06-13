@@ -85,26 +85,26 @@
 			"steps": [
 				{
 					"details": "Placement preview",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Intersection detection and preview",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Trigger actual placement",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Chain pins",
+					"done": true
+				},
+				{
+					"details": "Placement removal/unlinking",
 					"done": false
 				},
 				{
 					"details": "Light beacon",
-					"done": false
-				},
-				{
-					"details": "Placement removal/unlinking",
 					"done": false
 				}
 			]

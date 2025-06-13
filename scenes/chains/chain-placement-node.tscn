@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3ag04pchb4uc"]
+
+[ext_resource type="Script" uid="uid://oc12iclk1rty" path="res://scripts/chains/chain-placement-node.gd" id="1_h2gu0"]
+[ext_resource type="PackedScene" uid="uid://decxmw2xnv8ul" path="res://models/chains/chain-link.gltf" id="2_qepw0"]
+[ext_resource type="PackedScene" uid="uid://eat5ys10j0mk" path="res://scenes/chains/chain-pin.tscn" id="3_qepw0"]
+
+[node name="ChainPlacementNode" type="Node3D"]
+script = ExtResource("1_h2gu0")
+
+[node name="ChainLink" type="Node3D" parent="."]
+
+[node name="ChainLinkModel" parent="ChainLink" instance=ExtResource("2_qepw0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24, 0, 0)
+
+[node name="ChainPin" parent="." instance=ExtResource("3_qepw0")]
+
+[node name="ChainRayCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1)
+collision_mask = 2

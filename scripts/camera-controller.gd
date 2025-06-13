@@ -41,8 +41,14 @@ var _min_tilt_radians: float = deg_to_rad(_min_tilt)
 var _max_tilt_radians: float = deg_to_rad(_max_tilt)
 var _zoom_range_length: float = _max_zoom - _min_zoom
 
+var still: bool:
+	get:
+		return _input_relative.is_zero_approx()
+	set(_value):
+		pass
+
 @onready var _camera: Camera3D = $Camera
-@onready var _camera_ray_cast: RayCast3D = $CameraRayCast
+@onready var camera_ray_cast: RayCast3D = $CameraRayCast
 
 @onready var _initial_position: Vector2 = Vector2(position.x, position.y)
 @onready var _initial_rotation: Vector2 = Vector2(rotation.x, rotation.y)
@@ -67,8 +73,8 @@ func _input(event: InputEvent) -> void:
 
 			if _was_moving_or_rotating:
 				_was_moving_or_rotating = false
-			elif not _was_moving_or_rotating and _camera_ray_cast.is_colliding():
-				var collider: Object = _camera_ray_cast.get_collider()
+			elif not _was_moving_or_rotating and camera_ray_cast.is_colliding():
+				var collider: Object = camera_ray_cast.get_collider()
 				if collider.has_method("select_handler"):
 					collider.call("select_handler", interact_released)
 
@@ -82,7 +88,7 @@ func _input(event: InputEvent) -> void:
 			else:
 				_target_rotation = _initial_rotation
 				_target_zoom = _initial_zoom
-		elif _input_relative.is_zero_approx():
+		elif still:
 			if event.is_action_pressed("interact"):
 				_moving = true
 			elif event.is_action_pressed("cancel"):
@@ -91,7 +97,7 @@ func _input(event: InputEvent) -> void:
 		var input_event: InputEventMouseMotion = event
 		_input_relative = input_event.relative
 
-		if (_moving or _rotating) and not _input_relative.is_zero_approx():
+		if (_moving or _rotating) and not still:
 			_was_moving_or_rotating = true
 
 		_update_camera_ray_cast(input_event.position)
@@ -124,4 +130,4 @@ func _process(delta: float) -> void:
 func _update_camera_ray_cast(input_position: Vector2) -> void:
 	var from: Vector3 = _camera.project_ray_origin(input_position)
 	var to: Vector3 = from + (_camera.project_ray_normal(input_position) * _ray_cast_length)
-	_camera_ray_cast.look_at_from_position(from, to)
+	camera_ray_cast.look_at_from_position(from, to)

@@ -3,25 +3,25 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dflvbv46kp4t5"
-path="res://.godot/imported/box-light.gltf-3f176e5c4bd1dde8fb913de9a60bf96a.scn"
+uid="uid://decxmw2xnv8ul"
+path="res://.godot/imported/chain-link.gltf-e012199af4db14b391f698331ccad8b7.scn"
 
 [deps]
 
-source_file="res://models/box-parts/box-light.gltf"
-dest_files=["res://.godot/imported/box-light.gltf-3f176e5c4bd1dde8fb913de9a60bf96a.scn"]
+source_file="res://models/chains/chain-link.gltf"
+dest_files=["res://.godot/imported/chain-link.gltf-e012199af4db14b391f698331ccad8b7.scn"]
 
 [params]
 
 nodes/root_type=""
-nodes/root_name="BoxLight"
+nodes/root_name="ChainLink"
 nodes/apply_root_scale=false
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
 nodes/use_node_type_suffixes=false
 meshes/ensure_tangents=true
 meshes/generate_lods=true
-meshes/create_shadow_meshes=true
+meshes/create_shadow_meshes=false
 meshes/light_baking=0
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
@@ -34,15 +34,7 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "meshes": {
-"box-light_LightFrameMesh": {
-"generate/lightmap_uv": 0,
-"generate/lods": 0,
-"generate/shadow_meshes": 2,
-"lods/normal_merge_angle": 60.0,
-"save_to_file/enabled": false,
-"save_to_file/path": ""
-},
-"box-light_LightMesh": {
+"chain-link_ChainLink": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 2,
@@ -52,10 +44,7 @@ _subresources={
 }
 },
 "nodes": {
-"PATH:LightFrameMesh": {
-"mesh_instance/cast_shadow": 0
-},
-"PATH:LightMesh": {
+"PATH:ChainLinkMesh": {
 "mesh_instance/cast_shadow": 0
 }
 }

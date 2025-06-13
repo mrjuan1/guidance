@@ -13,10 +13,12 @@ extends StaticBody3D
 		_lerp_speed = value
 		_update_lerp_speed()
 
+var output: Node3D
+
 @onready var _box: Box = $Box
 @onready var _box_light: BoxLight = $BoxLight
 @onready var _chain_link_static: ChainLink = $ChainLinkStatic
-@onready var _power_source_light: PowerSourceLight = $PowerSourceLight
+@onready var _power_source_light: Light = $PowerSourceLight
 
 func _ready() -> void:
 	_update_active()

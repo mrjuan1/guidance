@@ -3,25 +3,25 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://decxmw2xnv8ul"
-path="res://.godot/imported/chain-link.gltf-a59ede96b88749f1a4d10c9355e3bbe2.scn"
+uid="uid://40u5e3boyjqi"
+path="res://.godot/imported/chain-pin.gltf-d2f776ba2f20eaa59bac511fbdd0ff15.scn"
 
 [deps]
 
-source_file="res://models/chain-link.gltf"
-dest_files=["res://.godot/imported/chain-link.gltf-a59ede96b88749f1a4d10c9355e3bbe2.scn"]
+source_file="res://models/chains/chain-pin.gltf"
+dest_files=["res://.godot/imported/chain-pin.gltf-d2f776ba2f20eaa59bac511fbdd0ff15.scn"]
 
 [params]
 
 nodes/root_type=""
-nodes/root_name="ChainLink"
+nodes/root_name="ChainPin"
 nodes/apply_root_scale=false
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
 nodes/use_node_type_suffixes=false
 meshes/ensure_tangents=true
 meshes/generate_lods=true
-meshes/create_shadow_meshes=true
+meshes/create_shadow_meshes=false
 meshes/light_baking=0
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
@@ -33,8 +33,18 @@ animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
+"meshes": {
+"chain-pin_ChainPinMesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 2,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": false,
+"save_to_file/path": ""
+}
+},
 "nodes": {
-"PATH:ChainLinkMesh": {
+"PATH:ChainPinMesh": {
 "mesh_instance/cast_shadow": 0
 }
 }

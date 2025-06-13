@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://bvkdxtdxrnnjo"]
 
-[ext_resource type="PackedScene" uid="uid://decxmw2xnv8ul" path="res://models/chain-link.gltf" id="1_eb4j7"]
-[ext_resource type="Script" uid="uid://8ao8lhte7680" path="res://scripts/chain-link.gd" id="1_nuhkk"]
-[ext_resource type="Script" uid="uid://ojty5xb3j6dn" path="res://scripts/chain-link-resource.gd" id="2_22wee"]
-[ext_resource type="Script" uid="uid://dfmcypuoj87xd" path="res://scripts/chain-link-interaction.gd" id="4_shelp"]
+[ext_resource type="PackedScene" uid="uid://decxmw2xnv8ul" path="res://models/chains/chain-link.gltf" id="1_eb4j7"]
+[ext_resource type="Script" uid="uid://8ao8lhte7680" path="res://scripts/chains/chain-link.gd" id="1_nuhkk"]
+[ext_resource type="Script" uid="uid://ojty5xb3j6dn" path="res://scripts/chains/chain-link-resource.gd" id="2_22wee"]
+[ext_resource type="Script" uid="uid://dfmcypuoj87xd" path="res://scripts/chains/chain-link-interaction.gd" id="4_shelp"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_22wee"]
 height = 0.22

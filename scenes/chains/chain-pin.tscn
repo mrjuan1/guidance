@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://eat5ys10j0mk"]
+
+[ext_resource type="Script" uid="uid://foriw56lxvnf" path="res://scripts/chains/chain-pin.gd" id="1_a7xup"]
+[ext_resource type="PackedScene" uid="uid://40u5e3boyjqi" path="res://models/chains/chain-pin.gltf" id="3_a7xup"]
+[ext_resource type="Script" uid="uid://bkaahab6lvd6i" path="res://scripts/light.gd" id="6_0p2yl"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kxt32"]
+height = 0.9
+radius = 0.05
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ieyj6"]
+height = 0.1
+radius = 0.183
+
+[node name="ChainPin" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_a7xup")
+
+[node name="ChainPinModel" parent="." instance=ExtResource("3_a7xup")]
+
+[node name="PinCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("CylinderShape3D_kxt32")
+
+[node name="HeadCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+shape = SubResource("CylinderShape3D_ieyj6")
+
+[node name="ChainPinLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+light_color = Color(0.498, 0.231, 0, 1)
+light_bake_mode = 0
+shadow_opacity = 0.0
+omni_range = 0.75
+omni_attenuation = 2.0
+script = ExtResource("6_0p2yl")
+_active_range = 1.0
+_active_shadow_opacity = 0.0
+_inactive_range = 0.75
+_inactive_energy = 0.5
