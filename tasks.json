@@ -22,8 +22,7 @@
 			"title": "Todo",
 			"tasks": [
 				"c85b6442-60b2-4cde-b8a6-948e1b764fe7",
-				"a6030f99-7495-49f1-8ab5-82caa38c67cc",
-				"4347d88f-e11f-4646-a2d9-8aef7f12eb08",
+				"68f0c6bf-d255-47c3-bc25-3d5d32dd892a",
 				"69d48a1e-b26c-4734-bd79-9a984a836897",
 				"90b50e3b-041f-426b-9c79-ecd81c827ec9",
 				"aad9a757-9a20-48a7-b3bc-48e805431a11",
@@ -36,8 +35,7 @@
 			"uuid": "c70b767e-9763-4ba0-9c4a-d612d53effb5",
 			"title": "In Progress",
 			"tasks": [
-				"618fbffa-2e31-4520-a0f6-10ffa65ab5bd",
-				"68f0c6bf-d255-47c3-bc25-3d5d32dd892a"
+				"4347d88f-e11f-4646-a2d9-8aef7f12eb08"
 			]
 		},
 		{
@@ -45,7 +43,9 @@
 			"title": "Done",
 			"tasks": [
 				"26efff71-0a3f-468b-96ea-e0daf8a936a8",
-				"7235df45-747f-4d22-8112-4fa7b55782a7"
+				"7235df45-747f-4d22-8112-4fa7b55782a7",
+				"a6030f99-7495-49f1-8ab5-82caa38c67cc",
+				"618fbffa-2e31-4520-a0f6-10ffa65ab5bd"
 			]
 		}
 	],
@@ -101,11 +101,11 @@
 				},
 				{
 					"details": "Placement removal/unlinking",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Light beacon",
-					"done": false
+					"done": true
 				}
 			]
 		},
@@ -185,7 +185,12 @@
 			"title": "More ideas for game mechanics (nodes, threats, etc.)",
 			"description": "",
 			"category": "003677f8-3dd1-47d9-a7b0-9747c51d506a",
-			"steps": []
+			"steps": [
+				{
+					"details": "New node that requires fast-pulsing signals(?)",
+					"done": false
+				}
+			]
 		},
 		{
 			"uuid": "78dee35e-decf-4617-ab26-bbd49da93c0f",

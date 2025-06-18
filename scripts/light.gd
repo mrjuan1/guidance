@@ -13,17 +13,20 @@ extends OmniLight3D
 @export var _active_colour: Color = Color(1.0, 0.8, 0.0)
 @export var _active_range: float = 5.0
 @export var _active_energy: float = 1.0
+@export var _active_attenuation: float = 1.0
 @export var _active_shadow_opacity: float = 1.0
 
 @export_group("Inactive")
 @export var _inactive_colour: Color = Color(0.498, 0.231, 0.0)
 @export var _inactive_range: float = 1.5
 @export var _inactive_energy: float = 1.0
+@export var _inactive_attenuation: float = 1.0
 @export var _inactive_shadow_opacity: float = 0.0
 
 var _colour: Color
 var _range: float
 var _energy: float
+var _attenuation: float
 var _shadow_opacity: float
 
 func _ready() -> void:
@@ -34,6 +37,7 @@ func _process(delta: float) -> void:
 	light_color = lerp(light_color, _colour, scaled_lerp_speed)
 	omni_range = lerpf(omni_range, _range, scaled_lerp_speed)
 	light_energy = lerpf(light_energy, _energy, scaled_lerp_speed)
+	omni_attenuation = lerpf(omni_attenuation, _attenuation, scaled_lerp_speed)
 	shadow_opacity = lerpf(shadow_opacity, _shadow_opacity, scaled_lerp_speed)
 
 func _set_colour() -> void:
@@ -41,9 +45,11 @@ func _set_colour() -> void:
 		_colour = _active_colour
 		_range = _active_range
 		_energy = _active_energy
+		_attenuation = _active_attenuation
 		_shadow_opacity = _active_shadow_opacity
 	else:
 		_colour = _inactive_colour
 		_range = _inactive_range
 		_energy = _inactive_energy
+		_attenuation = _inactive_attenuation
 		_shadow_opacity = _inactive_shadow_opacity

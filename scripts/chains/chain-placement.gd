@@ -50,11 +50,17 @@ func start(node: Node3D) -> void:
 			if source_parent is PowerSource:
 				var power_source: PowerSource = source_parent
 				if power_source.output:
-					push_warning("Cannot link a chain from a source where only one chain is allowed")
+					push_warning("Cannot link another chain from a source where only one chain is allowed")
 					_source = null
 					return
 				else:
 					_source_parent = power_source
+	elif _source is ChainPin:
+		var chain_pin: ChainPin = _source
+		if len(chain_pin.outputs) >= 2:
+			push_warning("Cannot link more than two chains from a chain pin")
+			_source = null
+			return
 
 	_chain_placement_node = _chain_placement_resource.instantiate()
 	_chain_placement_node.position = _source.global_position # Will test linking from future nodes
@@ -83,41 +89,66 @@ func end(place_chain: bool) -> void:
 		printerr("Scene node could not be found")
 		return
 
+	var start_position: Vector3 = _source.global_position
+
+	var end_position: Vector3
+	var placement_node_target: Node3D = _chain_placement_node.target
+	if placement_node_target is LightBeacon:
+		var chain_link: ChainLink = placement_node_target.find_child("ChainLinkStatic")
+		end_position = chain_link.global_position
+	else:
+		end_position = scene.camera_controller.camera_ray_cast.get_collision_point()
+
 	_chain_placement_node.queue_free()
 
-	var start_position: Vector3 = _source.global_position
-	# Might end up being another ChainInteraction's position, will have to check collider's type
-	var end_position: Vector3 = scene.camera_controller.camera_ray_cast.get_collision_point()
-
-	if _source_parent is PowerSource:
+	if _source_parent is PowerSource or _source is ChainPin:
 		var direction: Vector3 = (end_position - start_position).normalized()
 		direction.y = 0.0
 
 		var offset: Vector3 = direction * CHAIN_LINK_LENGTH
-		start_position += offset
-		end_position += offset
+		if _source_parent is PowerSource:
+			start_position += offset
+
+		if placement_node_target is not LightBeacon:
+			end_position += offset
+
+		if _source is ChainPin:
+			start_position.y = 0.5
+			end_position.y = 0.5
 
 	# Check for valid colliders, else place a chain pin (below is for placing a pin)
-	var chain_pin_position: Vector3 = scene.camera_controller.camera_ray_cast.get_collision_point()
+	var chain_pin: ChainPin
+	if not placement_node_target:
+		var chain_pin_position: Vector3 = scene.camera_controller.camera_ray_cast.get_collision_point()
 
-	var scene_navigation_region: NavigationRegion3D = scene.root_node.find_child("NavigationRegion")
-	if not scene_navigation_region:
-		printerr("Scene has no navigation region")
-		return
+		var scene_navigation_region: NavigationRegion3D = scene.root_node.find_child("NavigationRegion")
+		if not scene_navigation_region:
+			printerr("Scene has no navigation region")
+			return
 
-	var chain_pin: ChainPin = _place_chain_pin(scene_navigation_region, chain_pin_position)
+		chain_pin = _place_chain_pin(scene_navigation_region, chain_pin_position)
 	# End of pin placement
 
 	var chain: Chain = _place_chain(start_position, end_position)
-	chain.input = _source_parent
-	chain.output = chain_pin
+	if _source_parent is PowerSource:
+		chain.input = _source_parent
+	elif _source is ChainPin:
+		chain.input = _source
+	if placement_node_target is LightBeacon:
+		var light_beacon: LightBeacon = placement_node_target
+		chain.output = light_beacon
+		light_beacon.input = chain
+	else:
+		chain.output = chain_pin
+		chain_pin.input = chain
 	scene.root_node.add_child(chain)
 
 	if _source_parent is PowerSource:
 		var power_source: PowerSource = _source_parent
 		power_source.output = chain
-
-	chain_pin.input = chain
+	elif _source is ChainPin:
+		var source_chain_pin: ChainPin = _source
+		source_chain_pin.outputs.push_back(chain)
 
 	_source_parent = null
 	_source = null
@@ -126,9 +157,9 @@ func end(place_chain: bool) -> void:
 func _place_chain_pin(navigation_region: NavigationRegion3D, position: Vector3) -> ChainPin:
 	var chain_pin: ChainPin = _chain_pin_resource.instantiate()
 
-	var chain_position: Vector3 = position
-	chain_position.y = -0.2 # Was 0.1
-	chain_pin.global_position = chain_position
+	var chain_pin_position: Vector3 = position
+	chain_pin_position.y = -0.2 # Was 0.1
+	chain_pin.global_position = chain_pin_position
 	# Need to figure out a way to deal with this
 	#chain_pin.rotation.x = randf_range(-_PIN_ROTATION_RANGE, _PIN_ROTATION_RANGE)
 	#chain_pin.rotation.y = randf_range(-_PIN_ROTATION_RANGE, _PIN_ROTATION_RANGE)

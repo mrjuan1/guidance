@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvpc7j5uxm1r2"]
+
+[ext_resource type="Script" uid="uid://br8ismle27egf" path="res://scripts/light-beacon.gd" id="1_ynss1"]
+[ext_resource type="PackedScene" uid="uid://b2t817enqvr0w" path="res://scenes/box.tscn" id="2_ip2kf"]
+[ext_resource type="PackedScene" uid="uid://bvkdxtdxrnnjo" path="res://scenes/chains/chain-link-static.tscn" id="5_emsgg"]
+[ext_resource type="Script" uid="uid://bkaahab6lvd6i" path="res://scripts/light.gd" id="6_gvbud"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2dofe"]
+
+[node name="LightBeacon" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_ynss1")
+
+[node name="Box" parent="." instance=ExtResource("2_ip2kf")]
+
+[node name="ChainLinkStatic" parent="." instance=ExtResource("5_emsgg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57, 0.5, 0)
+
+[node name="LightBeaconCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_2dofe")
+
+[node name="LightBeaconLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+light_color = Color(0.498, 0.231, 0, 1)
+light_bake_mode = 0
+shadow_enabled = true
+shadow_opacity = 0.0
+omni_range = 1.5
+omni_attenuation = 2.0
+script = ExtResource("6_gvbud")
+_active_range = 4.0
+_active_attenuation = 2.0
+_inactive_attenuation = 2.0

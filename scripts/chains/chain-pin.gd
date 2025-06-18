@@ -18,8 +18,8 @@ extends StaticBody3D
 
 var _colour: Color
 
-var input: Node3D
-var output: Node3D
+var input: Chain
+var outputs: Array[Chain] = []
 
 @onready var _chain_pin_model: Node3D = $ChainPinModel
 @onready var _chain_pin_mesh: MeshInstance3D = _chain_pin_model.find_child("ChainPinMesh")
@@ -47,8 +47,6 @@ func _update_lerp_speed() -> void:
 
 func select_handler(interacting: bool) -> void:
 	if interacting:
-		# spawn up to two new chains from here
-		pass
+		ChainPlacement.start(self)
 	else:
-		# Remove this pin and all linked chains
-		pass
+		queue_free()

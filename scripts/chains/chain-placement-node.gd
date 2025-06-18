@@ -6,9 +6,42 @@ extends Node3D
 @export var _placement_colour: Color = Color(0.0, 0.617, 1.0, 0.831)
 @export var _error_colour: Color = Color(1.0, 0.4, 0.4, 0.831)
 
+var target: Node3D:
+	get:
+		if camera_controller.camera_ray_cast.is_colliding():
+			var collider: Object = camera_controller.camera_ray_cast.get_collider()
+			if collider is ChainLinkInteraction:
+				var chain_link_interaction: ChainLinkInteraction = collider
+				var parent: Node3D = chain_link_interaction.get_parent_node_3d()
+				if parent is ChainLink:
+					var chain_link: ChainLink = parent
+					parent = chain_link.get_parent_node_3d()
+					if parent is LightBeacon:
+						return parent
+
+			if collider is LightBeacon:
+				return collider
+
+		return null
+	set(_value):
+		pass
+
 var can_place: bool:
 	get:
-		return _chain_link_count >= _min_chains and not _chain_ray_cast.is_colliding()
+		if _chain_link_count < _min_chains:
+			_chain_pin.visible = false
+			return false
+
+		if target:
+			_chain_pin.visible = false
+			return true
+
+		if not _chain_ray_cast.is_colliding():
+			_chain_pin.visible = true
+			return true
+
+		_chain_pin.visible = false
+		return false
 	set(_value):
 		pass
 
@@ -34,7 +67,15 @@ func _input(event: InputEvent) -> void:
 	if camera_controller.camera_ray_cast.is_colliding():
 		if event is InputEventMouseMotion:
 			var start: Vector3 = global_position
-			var end: Vector3 = camera_controller.camera_ray_cast.get_collision_point()
+
+			var end: Vector3
+			var target_node: Node3D = target
+			if target_node is LightBeacon:
+				var chain_link: ChainLink = target_node.find_child("ChainLinkStatic")
+				end = chain_link.global_position
+			else:
+				end = camera_controller.camera_ray_cast.get_collision_point()
+
 			var direction: Vector3 = end - start
 			var distance: float = direction.length()
 

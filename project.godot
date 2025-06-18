@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 ChainPlacement="*res://scripts/chains/chain-placement.gd"
+LevelProcessor="*res://scripts/level-processor.gd"
 
 [debug]
 

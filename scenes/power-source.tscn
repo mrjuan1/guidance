@@ -35,3 +35,6 @@ shadow_opacity = 0.0
 omni_range = 1.5
 omni_attenuation = 2.0
 script = ExtResource("6_kd56b")
+_active_range = 4.0
+_active_attenuation = 2.0
+_inactive_attenuation = 2.0

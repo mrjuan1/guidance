@@ -7,6 +7,8 @@ extends Node3D
 		active = value
 		if _chain_link_resource:
 			_set_colour()
+		if _chain_link_light:
+			_chain_link_light.active = active
 
 @export var _active_colour: Color = Color(1.0, 0.8, 0.0)
 @export var _inactive_colour: Color = Color(0.498, 0.231, 0.0)
@@ -17,6 +19,7 @@ extends Node3D
 		_update_lerp_speed()
 
 @onready var _chain_link_resource: ChainLinkResource = %ChainLinkResource
+@onready var _chain_link_light: Light = find_child("ChainLinkLight")
 
 func _ready() -> void:
 	_set_colour()
