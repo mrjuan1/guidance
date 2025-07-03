@@ -12,9 +12,9 @@ config_version=5
 
 config/name="Guidance"
 config/description="A small puzzle game about using light to guide little characters to safety.
-Currently planning to submit to the Portfolio Builders Week #24 game jam."
+Currently planning to submit to the Portfolio Builders Week #27 game jam."
 config/version="0.0.2"
-config/tags=PackedStringArray("game_jam", "mini_gim_#3", "portfolio_builders_jam_week_#24")
+config/tags=PackedStringArray("game_jam", "mini_gim_#3", "portfolio_builders_jam_week_#27")
 run/main_scene="uid://77g3x2qihytk"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
