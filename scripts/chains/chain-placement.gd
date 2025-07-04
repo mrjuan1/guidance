@@ -96,6 +96,14 @@ func end(place_chain: bool) -> void:
 	if placement_node_target is LightBeacon:
 		var chain_link: ChainLink = placement_node_target.find_child("ChainLinkStatic")
 		end_position = chain_link.global_position
+	elif placement_node_target is Override:
+		var override: Override = placement_node_target
+		if not override.input1:
+			var chain_link_in1: ChainLink = override.find_child("ChainLinkIn1")
+			end_position = chain_link_in1.global_position
+		elif not override.input2:
+			var chain_link_in2: ChainLink = override.find_child("ChainLinkIn2")
+			end_position = chain_link_in2.global_position
 	else:
 		end_position = scene.camera_controller.camera_ray_cast.get_collision_point()
 
@@ -109,7 +117,7 @@ func end(place_chain: bool) -> void:
 		if _source_parent is PowerSource:
 			start_position += offset
 
-		if placement_node_target is not LightBeacon:
+		if placement_node_target is not LightBeacon and placement_node_target is not Override:
 			end_position += offset
 
 		if _source is ChainPin:
@@ -138,6 +146,13 @@ func end(place_chain: bool) -> void:
 		var light_beacon: LightBeacon = placement_node_target
 		chain.output = light_beacon
 		light_beacon.input = chain
+	elif placement_node_target is Override:
+		var override: Override = placement_node_target
+		chain.output = override
+		if not override.input1:
+			override.input1 = chain
+		elif not override.input2:
+			override.input2 = chain
 	else:
 		chain.output = chain_pin
 		chain_pin.input = chain

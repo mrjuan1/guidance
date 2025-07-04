@@ -73,6 +73,14 @@ func _input(event: InputEvent) -> void:
 			if target_node is LightBeacon:
 				var chain_link: ChainLink = target_node.find_child("ChainLinkStatic")
 				end = chain_link.global_position
+			elif target_node is Override:
+				var override: Override = target_node
+				if not override.input1:
+					var chain_link_in1: ChainLink = override.find_child("ChainLinkIn1")
+					end = chain_link_in1.global_position
+				elif not override.input2:
+					var chain_link_in2: ChainLink = override.find_child("ChainLinkIn2")
+					end = chain_link_in2.global_position
 			else:
 				end = camera_controller.camera_ray_cast.get_collision_point()
 
