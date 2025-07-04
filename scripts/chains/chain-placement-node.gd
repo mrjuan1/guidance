@@ -16,10 +16,10 @@ var target: Node3D:
 				if parent is ChainLink:
 					var chain_link: ChainLink = parent
 					parent = chain_link.get_parent_node_3d()
-					if parent is LightBeacon:
+					if parent is LightBeacon or parent is Override:
 						return parent
 
-			if collider is LightBeacon:
+			if collider is LightBeacon or collider is Override:
 				return collider
 
 		return null

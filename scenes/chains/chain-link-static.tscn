@@ -18,7 +18,7 @@ height = 0.15
 radius = 0.043
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eb4j7"]
-size = Vector3(0.48, 0.085, 0.34)
+size = Vector3(0.6, 0.2, 0.5)
 
 [node name="ChainLinkStatic" type="Node3D"]
 script = ExtResource("1_nuhkk")

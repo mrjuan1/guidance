@@ -11,13 +11,19 @@ extends Node3D
 @export var _inactive_colour: Color = Color(0.498, 0.231, 0.0)
 @export var colour_lerp_speed: float = 15.0
 
-var _meshes: Array = []
+var _meshes: Array[Node] = []
 var _materials: Array
 var _colour: Color
 
 func _ready() -> void:
-	_meshes.push_back(find_children("CornerFacesMesh"))
-	_meshes.push_back(find_children("CenterFacesMesh"))
+	var corner_faces: Array[Node] = find_children("CornerFacesMesh")
+	for corner_face: Node in corner_faces:
+		_meshes.push_back(corner_face)
+
+	var center_faces: Array[Node] = find_children("CenterFacesMesh")
+	for center_face: Node in center_faces:
+		_meshes.push_back(center_face)
+
 	_materials = _meshes.map(_map_material)
 	_set_colour()
 
